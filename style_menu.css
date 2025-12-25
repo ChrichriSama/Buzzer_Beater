@@ -40,9 +40,19 @@ ul{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--greylight);
     li{
         cursor: pointer;
         list-style: none;
+
+        &:hover {
+            color:white;
+        }
+
+        img{
+            width: 38px;
+            height: 38px;
+        }
     }
 
 }
