@@ -45,6 +45,15 @@ Résultats match:
 
 Espace Utilisateur:
 
+map:
+api map avec tous les endroits où on peut jouer au basket
+
+espace connection:
+se connecter
+gérer paramètres (prénom, nom, Photo ?, préférence (fond noir ou clair))
+
+forum:
+
 ------------------------------------------------------------------------
 Liens utiles:
 -------------
