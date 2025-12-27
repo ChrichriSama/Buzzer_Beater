@@ -7,7 +7,6 @@
     --blue: #0071e3;
     --a: #2997ff;
 }
-
 a{
     text-decoration: none;
     color: inherit;
@@ -59,4 +58,41 @@ ul{
         }
     }
 
+}
+div{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 5%;
+    width: 100%;
+    height: 100vh;
+}
+
+h2{
+    
+    font-size: 60px;
+    top:70%;
+    color: white;
+}
+
+
+div:nth-child(2){
+    background-image: url(fond_knicks.png);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+div:nth-child(3){
+    background-image: url(fond_nets.png);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+div:nth-child(4){
+    background-image: url(fond_lakers.png);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }
