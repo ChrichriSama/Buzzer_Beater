@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB News</title>
+</head>
+<body>
+    <h1>BB News</h1>
+    <h3 id="title"> </h3>
+    <img src="" alt="image" id="img1">
+    <br>
+    <p id="txt"> txt
+    </p>
+    <p id="date">
+    </p>
+
+    <script>
+    const url = "https://corsproxy.io/?https://rmcsport.bfmtv.com/rss/basket/nba/";
+    getxt(url);
+
+    async function getxt(url) {
+    console.log(1);
+    let x = await fetch(url);
+    let y = await x.text();
+    console.log(2);
+    console.log(y.substring(0,100));
+    xmlParser = new DOMParser();
+    console.log(3);
+    let xmlDoc = xmlParser.parseFromString(y, "text/xml");
+    console.log(xmlDoc);
+    let item = xmlDoc.getElementsByTagName("item");
+    console.log(item);
+    
+    let item0= xmlDoc.querySelectorAll("item")[0];
+    let titre0= item0.querySelectorAll("title")[0];
+    let date0= item0.querySelectorAll("pubDate")[0];
+    let txt0= item0.querySelectorAll("description")[0];
+    let img0= item0.querySelectorAll("enclosure")[0]
+    console.log(item0);
+    console.log(titre0);
+    document.getElementById("title").innerText = titre0.textContent;
+    document.getElementById("date").innerText = date0.textContent;
+    document.getElementById("txt").innerText = txt0.textContent.substring(0, txt0.textContent.search("<"));
+    document.getElementById("img1").src = img0.getAttribute("url");
+
+
+    }
+    </script>
+
+</body>
+</html>
