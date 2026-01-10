@@ -48,13 +48,13 @@
     
 
     // let test = htmlDoc_txt.querySelector(" .grid_wrapper");
-    let test = htmlDoc_txt.querySelector(".content_body_wrapper");
-    
- 
+    let test = htmlDoc_txt.querySelector(".grid_wrapper");
     
     if (test){
         console.log("ok");
         console.log(test.textContent.length);
+        txt = test.textContent.substring(test.textContent.search("NBA:"), test.textContent.search("Cupif"))
+        console.log(test.textContent.substring(test.textContent.search("NBA:"), test.textContent.search("Cupif")));
     }
 
     else{
@@ -66,7 +66,7 @@
     // console.log(titre0);
     document.getElementById("title").innerText = titre0.textContent;
     document.getElementById("date").innerText = date0.textContent;
-    document.getElementById("txt").innerText = v1txt0.textContent.substring(0, v1txt0.textContent.search("<")) + test;
+    document.getElementById("txt").innerHTML = v1txt0.textContent.substring(0, v1txt0.textContent.search("<")) +"<br>" + txt;
     document.getElementById("img1").src = img0.getAttribute("url");
 
 
