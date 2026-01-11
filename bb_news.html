@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_news.css"/>
+    <link rel="shortcut icon" href="logo_bb.png" type="image/x-icon">
     <title>BB News</title>
 </head>
 <body>
+    <header>
+        <ul>
+            <li><img src= "logo_bb.png" alt= "logo"></li>
+            <li> <a href="bb_menu.html">Home</a></li>
+            <li><a href="bb_news.html">News </a></li>
+            <li>Presentation </li>
+            <li> Sneakers</li>
+            <li> <a href="bb_teams.html">Teams</a></li>
+            <li> Results</li>
+            <li> Map</li>
+            <li> Forum</li>
+            <li> Connect</li>
+
+        </ul>
+    </header>
+    
     <h1>BB News</h1>
-    <h3 id="title"> </h3>
-    <img src="" alt="image" id="img1">
-    <br>
-    <p id="txt"> txt
-    </p>
-    <p id="date">
-    </p>
 
     <script>
-        // flux rss l'equipe https://dwh.lequipe.fr/api/edito/rss?path=/Basket/
+
+    // flux rss l'equipe https://dwh.lequipe.fr/api/edito/rss?path=/Basket/
 
     const url = "https://corsproxy.io/?https://rmcsport.bfmtv.com/rss/basket/nba/";
     getxt(url);
@@ -25,51 +37,79 @@
     let x = await fetch(url);
     let y = await x.text();
     console.log(2);
-    console.log(y.substring(0,100));
+    console.log(y.substring());
     xmlParser = new DOMParser();
     console.log(3);
     let xmlDoc = xmlParser.parseFromString(y, "text/xml");
     console.log(xmlDoc);
     let item = xmlDoc.getElementsByTagName("item");
     console.log(item);
+    console.log(item.length);
     
-    let item0= xmlDoc.querySelectorAll("item")[0];
-    let titre0= item0.querySelectorAll("title")[0];
-    let date0= item0.querySelectorAll("pubDate")[0];
-    let v1txt0= item0.querySelectorAll("description")[0];
-    let img0= item0.querySelectorAll("enclosure")[0];
+    
+    for (let i=0; i<item.length; i++){
 
-    lettxt = xmlDoc.querySelectorAll("link")[0].textContent;
+        let paragraphe = document.createElement("div");
+        const body = document.body;
+        
+        //Item (article)
+        let item_i= xmlDoc.querySelectorAll("item")[i];
 
-    let fetch_txt = await fetch("https://corsproxy.io/?" + lettxt);
-    let fetch_txt_y = await fetch_txt.text();
-    htmlParser_txt = new DOMParser();
-    let htmlDoc_txt = htmlParser_txt.parseFromString(fetch_txt_y, "text/html");
+        //Title (of the article)
+        let title = document.createElement("h3");
+        let title_i= item_i.querySelector("title");
+        title.append(title_i.textContent);
+
+        //Image (of the article)
+        const img = new Image();
+        img.src = item_i.querySelector("enclosure").getAttribute("url");
+        document.body.appendChild(img);
+
+        //Date (of the article)
+        let date= document.createElement("p");
+        let date_i= item_i.querySelector("pubDate");
+        date.append(date_i.textContent);
+
+        //Text Content (of the article) (1st line...)
+        let txt= document.createElement("p");
+        let txt1_i= item_i.querySelector("description")
+        txt.append(txt1_i.textContent.substring(0, txt1_i.textContent.search("<")))
+
+        //Searching for the rest of the Text Content (Rest line)
+        lettxt = xmlDoc.querySelectorAll("link")[i].textContent;
+
+        let fetch_txt = await fetch("https://corsproxy.io/?" + lettxt);
+        let fetch_txt_y = await fetch_txt.text();
+        htmlParser_txt = new DOMParser();
+        let htmlDoc_txt = htmlParser_txt.parseFromString(fetch_txt_y, "text/html");
     
 
-    // let test = htmlDoc_txt.querySelector(" .grid_wrapper");
-    let test = htmlDoc_txt.querySelector(".grid_wrapper");
-    
-    if (test){
-        console.log("ok");
-        console.log(test.textContent.length);
-        txt = test.textContent.substring(test.textContent.search("NBA:"), test.textContent.search("Cupif"))
-        console.log(test.textContent.substring(test.textContent.search("NBA:"), test.textContent.search("Cupif")));
+        
+        let test = htmlDoc_txt.querySelector(".grid_wrapper");
+        
+
+
+        if (test){
+            console.log("ok");
+            let begin_txt = test.textContent.indexOf("NBA:");
+            let end_txt = test.textContent.indexOf("NBANBA:", begin_txt + 1);
+            console.log(test.textContent.length);
+            article = test.textContent.substring(begin_txt + 4, end_txt);
+            console.log(article);
+            txt.append(test.textContent.substring(begin_txt, end_txt))
+        }
+
+        else{
+        console.log("error 2nd fetch api")}
+
+        
+            paragraphe.appendChild(title);
+            paragraphe.appendChild(img);
+            paragraphe.appendChild(date)
+            paragraphe.appendChild(txt)
+            body.appendChild(paragraphe);
+
     }
-
-    else{
-    console.log(4)}
-   
-
-
-    // console.log(item0);
-    // console.log(titre0);
-    document.getElementById("title").innerText = titre0.textContent;
-    document.getElementById("date").innerText = date0.textContent;
-    document.getElementById("txt").innerHTML = v1txt0.textContent.substring(0, v1txt0.textContent.search("<")) +"<br>" + txt;
-    document.getElementById("img1").src = img0.getAttribute("url");
-
-
     }
     </script>
 
