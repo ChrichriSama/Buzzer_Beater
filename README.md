@@ -65,3 +65,6 @@ vidéos git et github:
 https://www.youtube.com/watch?v=anP0LBVhUzA&list=PL6Cz9tnj_488qRzP0zg3iFOHs0lFvmQdT&index=3
 
 https://www.youtube.com/watch?v=Ibf5GzjaXm8&list=PL6Cz9tnj_488qRzP0zg3iFOHs0lFvmQdT&index=2
+
+vidéo map_bb:
+https://www.youtube.com/watch?v=9oEQvI7K-rA
