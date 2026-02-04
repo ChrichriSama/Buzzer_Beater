@@ -1,7 +1,7 @@
 # Buzzer_Beater
 
 
-Idées:
+# Idées:
 -------
 
 -(extra API MAP:
@@ -12,11 +12,10 @@ Créer une map avec les terrains de baskets dispo sur paris (via une map import�
 Api (application Programme Interface) qui permet de récupérer des infos d’autres sites internet (trashtalk, l’équipe) via un flux rss)
 -Parallax effect
 -API Rest
--Ajouter map avec terrains basket
 -Mode sombre et Clairs
 
 ------------------------------------------------------------------------
-Langages:
+# Langages:
 ---------
 
 HTML/CSS
@@ -32,7 +31,7 @@ MERN
 
 
 ------------------------------------------------------------------------
-Structure du site:
+# Structure du site:
 ------------------
 
 Page accueil (apperçu des différent onglets):
@@ -55,10 +54,10 @@ espace connection:
 se connecter
 gérer paramètres (prénom, nom, Photo ?, préférence (fond noir ou clair))
 
-forum:
+rés. social? :
 
 ------------------------------------------------------------------------
-Liens utiles:
+# Liens utiles:
 -------------
 
 vidéos git et github:
@@ -68,3 +67,16 @@ https://www.youtube.com/watch?v=Ibf5GzjaXm8&list=PL6Cz9tnj_488qRzP0zg3iFOHs0lFvm
 
 vidéo map_bb:
 https://www.youtube.com/watch?v=9oEQvI7K-rA
+
+-------------------------------------------------------------------
+# ToDo
+--C
+[]finir page teams et automatiser les textes et images en background
+[]corriger css pour news
+[]rendre les pages responsives
+[]mode sombre?
+
+--Y
+[]finir map
+[]ajouter equiv. ruff
+[]venv?
