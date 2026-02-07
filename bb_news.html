@@ -22,7 +22,7 @@
 
         </ul>
     </header>
-    
+
     <h1>BB News</h1>
 
     <script>
@@ -44,13 +44,12 @@
     let item = xmlDoc.getElementsByTagName("item");
     console.log(item);
     console.log(item.length);
-    
-    
+
     for (let i=0; i<item.length; i++){
 
         let paragraphe = document.createElement("div");
         const body = document.body;
-        
+
         //Item (article)
         let item_i= xmlDoc.querySelectorAll("item")[i];
 
@@ -81,11 +80,11 @@
         let fetch_txt_y = await fetch_txt.text();
         htmlParser_txt = new DOMParser();
         let htmlDoc_txt = htmlParser_txt.parseFromString(fetch_txt_y, "text/html");
-    
 
-        
+
+
         let test = htmlDoc_txt.querySelector(".grid_wrapper");
-        
+
 
 
         if (test){
@@ -101,7 +100,7 @@
         else{
         console.log("error 2nd fetch api")}
 
-        
+
             paragraphe.appendChild(title);
             paragraphe.appendChild(img);
             paragraphe.appendChild(date)
