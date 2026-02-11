@@ -1,5 +1,5 @@
-:root{
-    --greydark:  #333333;
+:root {
+    --greydark: #333333;
     --greylight: #d6d6d6;
     --greylight2: #a1a1a6;
     --white: #f5f5f7;
@@ -7,35 +7,34 @@
     --blue: #0071e3;
     --a: #2997ff;
 }
-a{
+
+a {
     text-decoration: none;
     color: inherit;
 }
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: "Roboto", sans-serif;
     font-size: 14px;
 }
 
-header{
-    width:100%;
+header {
+    width: 100%;
     height: 45px;
     background: rgba(244, 94, 7, 1);
-    /* background: rgba(238,103,48, 1); */
-    /* background: rgba(245,73,39, 0.8); */
-
     position: fixed;
-    top:0;
-    left:0;
-    z-index: 000;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
-ul{
+ul {
     height: 100%;
     width: 100%;
     max-width: 1000px;
@@ -44,37 +43,45 @@ ul{
     align-items: center;
     justify-content: space-between;
     color: var(--greylight);
-    li{
-        cursor: pointer;
-        list-style: none;
-
-        &:hover {
-            color:white;
-        }
-
-        img{
-            width: 38px;
-            height: 38px;
-        }
-    }
-
 }
-div{
+
+ul li {
+    cursor: pointer;
+    list-style: none;
+}
+
+ul li:hover {
+    color: white;
+}
+
+ul li img {
+    width: 38px;
+    height: 38px;
+}
+
+/* CONFIGURATION GÉNÉRALE DES BLOCS */
+div {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     padding-left: 5%;
     width: 100%;
     height: 100vh;
+
+    /* Paramètres communs appliqués à TOUTES les équipes pour le Parallax */
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-h2{
+h2 {
     margin-bottom: 15px;
     font-size: 40px;
-    top:70%;
     color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
-
 
 .container {
     display: flex;
@@ -83,60 +90,114 @@ h2{
     padding: 5%;
 }
 
-.txt li{
+.txt li {
     margin-bottom: 15px;
 }
 
-.nav_left{
-   
+.nav_left {
     width: 25%;
 }
 
-.nav_right{
-   
+.nav_right {
     width: 25%;
-    
 }
 
-.txt{
+.txt {
     display: block;
     color: white;
     font-size: 15px;
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
+/* --- DISTRIBUTION DES IMAGES PARALLAX --- */
 
-div:nth-child(2){
-    background-image: url(fond_knicks.png);
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.12);
-}
+/* 1. Knicks (Base) */
+div:nth-child(2) { background-image: url(Parallax/fond_knicks.png); 
+background-color: rgba(0, 0, 0, 0.12); }
 
-div:nth-child(3){
-    background-image: url(fond_nets.png);
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-}
+/* 2. Nets (Base) */
+div:nth-child(3) { background-image: url(Parallax/fond_nets.png); }
 
-div:nth-child(4){
-    background-image: url(fond_lakers.png);
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-}
-div:nth-child(5){
-    background-image: url(fond_heat.png);
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-}
+/* 3. Lakers (Base) - CORRIGÉ EN PNG */
+div:nth-child(4) { background-image: url(Parallax/fond_lakers.png); }
 
-div:nth-child(6){
-    background-image: url(fond_bucks.png);
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-}
+/* 4. Heat (Base) */
+div:nth-child(5) { background-image: url(Parallax/fond_heat.png); }
+
+/* 5. Bucks (Base) */
+div:nth-child(6) { background-image: url(Parallax/fond_bucks.png); }
+
+/* 6. Bulls (Image 6) */
+div:nth-child(7) { background-image: url(Parallax/6.png); }
+
+/* 7. Celtics (Image 7) */
+div:nth-child(8) { background-image: url(Parallax/7.png); }
+
+/* 8. Cavs (Image 8) */
+div:nth-child(9) { background-image: url(Parallax/8.png); }
+
+/* 9. Pistons (Image 9) */
+div:nth-child(10) { background-image: url(Parallax/9.png); }
+
+/* 10. Pacers (Image 10) */
+div:nth-child(11) { background-image: url(Parallax/10.png); }
+
+/* 11. Magic (Image 11) */
+div:nth-child(12) { background-image: url(Parallax/11.png); }
+
+/* 12. Wizards (Image 12) */
+div:nth-child(13) { background-image: url(Parallax/12.png); }
+
+/* --- ON SAUTE L'IMAGE 13 (Doublon) ET ON PASSE DIRECT À 14 --- */
+
+/* 13. Raptors (Image 14) */
+div:nth-child(14) { background-image: url(Parallax/14.png); }
+
+/* 14. Hawks (Image 15) */
+div:nth-child(15) { background-image: url(Parallax/15.png); }
+
+/* 15. 76ers (Image 16) */
+div:nth-child(16) { background-image: url(Parallax/16.png); }
+
+/* 16. Hornets (Image 17) */
+div:nth-child(17) { background-image: url(Parallax/17.png); }
+
+/* 17. Warriors (Image 18) */
+div:nth-child(18) { background-image: url(Parallax/18.png); }
+
+/* 18. Rockets (Image 19) */
+div:nth-child(19) { background-image: url(Parallax/19.png); }
+
+/* 19. Suns (Image 20) */
+div:nth-child(20) { background-image: url(Parallax/20.png); }
+
+/* 20. Wolves (Image 21) */
+div:nth-child(21) { background-image: url(Parallax/21.png); }
+
+/* 21. Spurs (Image 22) */
+div:nth-child(22) { background-image: url(Parallax/22.png); }
+
+/* 22. Grizzlies (Image 23) */
+div:nth-child(23) { background-image: url(Parallax/23.png); }
+
+/* 23. Mavs (Image 24) */
+div:nth-child(24) { background-image: url(Parallax/24.png); }
+
+/* 24. Blazers (Image 25) */
+div:nth-child(25) { background-image: url(Parallax/25.png); }
+
+/* 25. Nuggets (Image 26) */
+div:nth-child(26) { background-image: url(Parallax/26.png); }
+
+/* 26. Clippers (Image 27) */
+div:nth-child(27) { background-image: url(Parallax/27.png); }
+
+/* 27. Pelicans (Image 28) */
+div:nth-child(28) { background-image: url(Parallax/28.png); }
+
+/* 28. Jazz (Image 29) */
+div:nth-child(29) { background-image: url(Parallax/29.png); }
+
+/* 29. Kings (Image 30) */
+div:nth-child(30) { background-image: url(Parallax/30.png); }
