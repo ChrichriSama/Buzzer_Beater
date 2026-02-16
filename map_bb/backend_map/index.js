@@ -8,7 +8,13 @@ const app = express();
 
 const userRoute = require("./routes/users")
 const pinRoute = require("./routes/pins")
+const cors = require('cors');
 
+//Allowing the front end to access the backend (CORS)
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 
 
 dotenv.config();

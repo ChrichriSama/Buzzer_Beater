@@ -10,7 +10,13 @@ import axios from "axios"
 import {format} from "timeago.js"
 
   function App() {
-    const[pins, setPins]= useState([])
+    const currentUser = "yanis75"
+    const [pins, setPins]= useState([])
+    const [currentPlaceId,setCurrentPlaceId] = useState(null)
+
+    // Create new place
+    const [newPlace,setnewPlace] = useState(null)
+
     useEffect(() => {
       const getPins = async ()=>{
         try {
@@ -23,7 +29,12 @@ import {format} from "timeago.js"
         }
       };
       getPins()
-    },[])
+    },[]);
+
+
+    const handleMarkerClick = (id)=>{
+      setCurrentPlaceId(id);
+     };
     return (
         <div className="App">
 
@@ -39,33 +50,43 @@ import {format} from "timeago.js"
             >
               {pins.map((p) => (
                 <>
-                  <Marker longitude={p.long} latitude={p.lat} anchor="bottom" >
-                  <RoomIcon style={{color: "red", fontSize: visualViewport.zoom }}/>
-                  </Marker>
+                  <Marker longitude={p.long} latitude={p.lat} anchor="bottom"
 
-                  <Popup longitude={p.long} latitude={p.lat}
-                    anchor="top"
-                    onClose={() => setShowPopup(false)}>
-                    <div className='card'>
-                      <label>Place</label>
-                      <h4 className='place'>{p.title}</h4>
-                      <label>address</label>
-                      <p>{p.address}</p>
-                      <label>Review </label>
-                      <p className='desc'>{p.desc}</p>
-                      <label>Rating</label>
-                      <div className="stars">
-                        <StarIcon className="star"/>
-                        <StarIcon className="star"/>
-                        <StarIcon className="star"/>
-                        <StarIcon className="star"/>
-                        <StarIcon className="star"/>
+                  // Prevent the click event from bubbling up to the map (which would close the popup immediately)
+                  onClick={(e) => {
+                    e.originalEvent.stopPropagation();
+                    handleMarkerClick(p._id);
+                  }} >
+                    <RoomIcon
+                      style={{color: p.username === currentUser ? "red" : '#5e17eb', fontSize: visualViewport.zoom, cursor: "pointer" }}
+                    />
+                  </Marker>
+                  {p._id === currentPlaceId && (
+                    <Popup longitude={p.long} latitude={p.lat}
+                      anchor="top"
+                      onClose={() => setCurrentPlaceId(null)}
+                      >
+                      <div className='card'>
+                        <label>Place</label>
+                        <h4 className='place'>{p.title}</h4>
+                        <label>address</label>
+                        <p>{p.address}</p>
+                        <label>Review </label>
+                        <p className='desc'>{p.desc}</p>
+                        <label>Rating</label>
+                        <div className="stars">
+                          <StarIcon className="star"/>
+                          <StarIcon className="star"/>
+                          <StarIcon className="star"/>
+                          <StarIcon className="star"/>
+                          <StarIcon className="star"/>
+                        </div>
+                        <span className="username">Created by <b>{p.username}</b></span>
+                        <br></br>
+                        <span className="date"> {format(p.createdAt)}</span>
                       </div>
-                      <span className="username">Created by <b>{p.username}</b></span>
-                      <br></br>
-                      <span className="date"> {format(p.createdAt)}</span>
-                    </div>
-                  </Popup>
+                    </Popup>)
+                  }
                 </>
               ))}
           </Map>

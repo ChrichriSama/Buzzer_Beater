@@ -13,7 +13,7 @@ Api (application Programme Interface) qui permet de récupérer des infos d’au
 -Parallax effect
 -API Rest
 -Mode sombre et Clairs
-
+-Les gens partagent les terrains qu'ils ont fait, les notes, et l'admin partage des terrains officiels noté en moyenne.
 ------------------------------------------------------------------------
 # Langages:
 ---------
@@ -81,3 +81,6 @@ https://www.youtube.com/watch?v=9oEQvI7K-rA
 []ajouter equiv. ruff
 []venv?
 []fix l'api fetch de news (pbm proxy?)!!
+
+
+REACT Mobile native
