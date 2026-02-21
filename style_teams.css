@@ -6,11 +6,7 @@
     --text: #1d1d1f;
     --blue: #0071e3;
     --a: #2997ff;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
+    --header-height: 45px;
 }
 
 * {
@@ -24,9 +20,14 @@ body {
     font-size: 14px;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 header {
     width: 100%;
-    height: 45px;
+    height: var(--header-height);
     background: rgba(244, 94, 7, 1);
     position: fixed;
     top: 0;
@@ -34,7 +35,16 @@ header {
     z-index: 1000;
 }
 
-ul {
+.checkbox {
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+/* Style de la barre de navigation sur PC */
+.navbar ul {
     height: 100%;
     width: 100%;
     max-width: 1000px;
@@ -45,18 +55,85 @@ ul {
     color: var(--greylight);
 }
 
-ul li {
+.navbar ul li {
     cursor: pointer;
     list-style: none;
 }
 
-ul li:hover {
-    color: white;
+.navbar ul li a {
+    display: block;
+    padding: 10px 15px; 
+    transition: 0.3s;
+    color: inherit;
 }
 
-ul li img {
+/* Effet au survol (Hover) */
+.navbar ul li a:hover {
+    background-image: url('balgris.png'); 
+    background-size: cover;
+    background-position: center;
+    color: purple;
+    font-weight: bold;
+    clip-path: polygon(
+        100% 0,
+        100% 35%,
+        90% 50%,
+        100% 65%,
+        100% 100%,
+        0 100%,
+        0 65%,
+        10% 50%, 
+        0 35%,
+        0 0
+    );
+}
+
+.navbar ul li img {
     width: 38px;
     height: 38px;
+    vertical-align: middle;
+}
+
+@media (max-width: 950px) {
+    .checkbox {
+        display: block;
+        float: right;
+        font-size: 24px;
+        color: white;
+        line-height: var(--header-height);
+        margin-right: 20px;
+        cursor: pointer;
+    }
+
+    .navbar ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: rgba(30, 30, 30, 0.95);
+        backdrop-filter: blur(10px);
+        top: var(--header-height);
+        left: -100%;
+        text-align: center;
+        transition: all 0.5s;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 100px;
+    }
+
+    .navbar ul li {
+        display: block;
+        margin: 20px 0;
+        width: 100%;
+    }
+
+    .navbar ul li a {
+        font-size: 20px;
+        color: white;
+    }
+    
+    #check:checked ~ .navbar ul {
+        left: 0;
+    }
 }
 
 div {
@@ -67,12 +144,36 @@ div {
     width: 100%;
     height: 100vh;
 
-    /* Paramètres communs appliqués à TOUTES les équipes pour le Parallax */
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
     background-blend-mode: overlay;
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    div {
+        flex-direction: column;
+        justify-content: center;
+        padding: 5% 2%;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav_left, .nav_right {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    h2 {
+        font-size: 30px;
+    }
 }
 
 h2 {
@@ -87,10 +188,6 @@ h2 {
     justify-content: space-between;
     gap: 20px;
     padding: 5%;
-}
-
-.txt li {
-    margin-bottom: 15px;
 }
 
 .nav_left {
@@ -109,9 +206,14 @@ h2 {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
-/* Knicks*/
-div:nth-child(2) { background-image: url(Parallax/fond_knicks.png); 
-background-color: rgba(0, 0, 0, 0.12); }
+.txt li {
+    margin-bottom: 15px;
+}
+
+/* --- IMAGES DES ÉQUIPES --- */
+
+/* Knicks */
+div:nth-child(2) { background-image: url(Parallax/fond_knicks.png); background-color: rgba(0, 0, 0, 0.12); }
 
 /* Nets */
 div:nth-child(3) { background-image: url(Parallax/fond_nets.png); }
@@ -125,7 +227,7 @@ div:nth-child(5) { background-image: url(Parallax/fond_heat.png); }
 /* Bucks */
 div:nth-child(6) { background-image: url(Parallax/fond_bucks.png); }
 
-/* Bulls*/
+/* Bulls */
 div:nth-child(7) { background-image: url(Parallax/6.png); }
 
 /* Celtics */
@@ -146,9 +248,7 @@ div:nth-child(12) { background-image: url(Parallax/11.png); }
 /* Wizards */
 div:nth-child(13) { background-image: url(Parallax/12.png); }
 
-/* --- ON SAUTE L'IMAGE 13 (Doublon) ET ON PASSE DIRECT À 14 --- */
-
-/* Raptors */
+/* Raptors (Pas de 13/Pistons doublon, on passe à 14) */
 div:nth-child(14) { background-image: url(Parallax/14.png); }
 
 /* Hawks */
@@ -196,5 +296,5 @@ div:nth-child(28) { background-image: url(Parallax/28.png); }
 /* Jazz */
 div:nth-child(29) { background-image: url(Parallax/29.png); }
 
-/* Kings  */
+/* Kings */
 div:nth-child(30) { background-image: url(Parallax/30.png); }
