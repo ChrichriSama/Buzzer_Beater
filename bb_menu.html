@@ -4,26 +4,404 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style_teams.css"/>
-    <title>NBA Teams</title>
+    <title>Buzzer Beater — NBA Hub</title>
     <link rel="shortcut icon" href="logo_bb.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/3ca4fe2b8a.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- ===== HEADER ===== -->
 <header>
     <input type="checkbox" id="check">
     <label for="check" class="checkbox">&#9776;</label>
     <nav class="navbar">
         <ul>
             <li><img src="logo_bb.png" alt="logo"></li>
-            <li><a href="bb_menu.html">Home</a></li>
+            <li><a href="bb_menu.html" class="nav-current">Home</a></li>
             <li><a href="bb_news.html">News</a></li>
             <li><a href="bb_teams.html">Teams</a></li>
             <li>Results</li>
             <li>Map</li>
             <li>Message</li>
-            <li>Connect</li>
+            <li><a href="login.html">Connect</a></li>
         </ul>
     </nav>
 </header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-orb hero-orb--a"></div>
+    <div class="hero-orb hero-orb--b"></div>
+
+    <div class="hero-content">
+        <span class="hero-badge"><i class="fa-solid fa-basketball"></i> NBA Season 2024-25</span>
+        <h1 class="hero-title">
+            <span class="hero-title__main">BUZZER</span>
+            <span class="hero-title__accent">BEATER</span>
+        </h1>
+        <p class="hero-sub">Le hub ultime pour suivre la NBA — News, équipes, résultats, carte des terrains et forum communautaire.</p>
+        <div class="hero-ctas">
+            <a href="bb_teams.html" class="btn-hero btn-hero--primary">
+                <i class="fa-solid fa-shield-halved"></i> Explorer les équipes
+            </a>
+            <a href="bb_news.html" class="btn-hero btn-hero--secondary">
+                <i class="fa-solid fa-newspaper"></i> Dernières news
+            </a>
+        </div>
+    </div>
+
+    <a href="#features" class="hero-scroll" aria-label="Descendre">
+        <i class="fa-solid fa-chevron-down"></i>
+    </a>
+</section>
+
+<!-- ===== FEATURES BAR ===== -->
+<section class="features" id="features">
+    <div class="features-grid">
+        <a href="bb_teams.html" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>30 Équipes</h3>
+            <p>Compositions, historiques et stats de toutes les franchises</p>
+        </a>
+        <a href="bb_news.html" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-newspaper"></i></div>
+            <h3>Actualités</h3>
+            <p>Flux RSS live depuis les meilleures sources basket</p>
+        </a>
+        <a href="#" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+            <h3>Carte NBA</h3>
+            <p>Localise les terrains de basket près de chez toi</p>
+        </a>
+        <a href="#forum" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-comments"></i></div>
+            <h3>Forum</h3>
+            <p>Débats, topics et communauté de passionnés</p>
+        </a>
+    </div>
+</section>
+
+<!-- ===== DERNIÈRES NEWS ===== -->
+<section class="section-home" id="news-home">
+    <div class="section-header">
+        <h2 class="section-title"><span>Dernières</span> news</h2>
+        <a href="bb_news.html" class="section-more">Tout voir <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="news-grid" id="home-news-grid">
+        <div class="news-skeleton"></div>
+        <div class="news-skeleton"></div>
+        <div class="news-skeleton"></div>
+    </div>
+</section>
+
+<!-- ===== ÉQUIPES VEDETTES ===== -->
+<section class="section-home section-dark" id="teams-home">
+    <div class="section-header">
+        <h2 class="section-title"><span>Équipes</span> vedettes</h2>
+        <a href="bb_teams.html" class="section-more">Toutes les équipes <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="teams-scroll">
+        <div class="team-card knicks">
+            <div class="team-card__overlay"></div>
+            <div class="team-card__content">
+                <h3>Knicks</h3>
+                <p class="team-city">New York</p>
+                <ul class="team-five">
+                    <li>Jalen Brunson <span>PG</span></li>
+                    <li>Mikal Bridges <span>SG</span></li>
+                    <li>OG Anunoby <span>SF</span></li>
+                    <li>Josh Hart <span>PF</span></li>
+                    <li>Karl-Anthony Towns <span>C</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="team-card lakers">
+            <div class="team-card__overlay"></div>
+            <div class="team-card__content">
+                <h3>Lakers</h3>
+                <p class="team-city">Los Angeles</p>
+                <ul class="team-five">
+                    <li>D'Angelo Russell <span>PG</span></li>
+                    <li>Austin Reaves <span>SG</span></li>
+                    <li>LeBron James <span>SF</span></li>
+                    <li>Rui Hachimura <span>PF</span></li>
+                    <li>Anthony Davis <span>C</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="team-card heat">
+            <div class="team-card__overlay"></div>
+            <div class="team-card__content">
+                <h3>Heat</h3>
+                <p class="team-city">Miami</p>
+                <ul class="team-five">
+                    <li>Terry Rozier <span>PG</span></li>
+                    <li>Tyler Herro <span>SG</span></li>
+                    <li>Jimmy Butler <span>SF</span></li>
+                    <li>Nikola Jovic <span>PF</span></li>
+                    <li>Bam Adebayo <span>C</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="team-card celtics">
+            <div class="team-card__overlay"></div>
+            <div class="team-card__content">
+                <h3>Celtics</h3>
+                <p class="team-city">Boston</p>
+                <ul class="team-five">
+                    <li>Jrue Holiday <span>PG</span></li>
+                    <li>Derrick White <span>SG</span></li>
+                    <li>Jaylen Brown <span>SF</span></li>
+                    <li>Jayson Tatum <span>PF</span></li>
+                    <li>Kristaps Porzingis <span>C</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="team-card warriors">
+            <div class="team-card__overlay"></div>
+            <div class="team-card__content">
+                <h3>Warriors</h3>
+                <p class="team-city">Golden State</p>
+                <ul class="team-five">
+                    <li>Stephen Curry <span>PG</span></li>
+                    <li>De'Anthony Melton <span>SG</span></li>
+                    <li>Andrew Wiggins <span>SF</span></li>
+                    <li>Draymond Green <span>PF</span></li>
+                    <li>Trayce Jackson-Davis <span>C</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="team-card bucks">
+            <div class="team-card__overlay"></div>
+            <div class="team-card__content">
+                <h3>Bucks</h3>
+                <p class="team-city">Milwaukee</p>
+                <ul class="team-five">
+                    <li>Damian Lillard <span>PG</span></li>
+                    <li>Gary Trent Jr. <span>SG</span></li>
+                    <li>Khris Middleton <span>SF</span></li>
+                    <li>Giannis Antetokounmpo <span>PF</span></li>
+                    <li>Brook Lopez <span>C</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="team-card bulls">
+            <div class="team-card__overlay"></div>
+            <div class="team-card__content">
+                <h3>Bulls</h3>
+                <p class="team-city">Chicago</p>
+                <ul class="team-five">
+                    <li>Josh Giddey <span>PG</span></li>
+                    <li>Coby White <span>SG</span></li>
+                    <li>Zach LaVine <span>SF</span></li>
+                    <li>Patrick Williams <span>PF</span></li>
+                    <li>Nikola Vucevic <span>C</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="team-card mavericks">
+            <div class="team-card__overlay"></div>
+            <div class="team-card__content">
+                <h3>Mavericks</h3>
+                <p class="team-city">Dallas</p>
+                <ul class="team-five">
+                    <li>Luka Doncic <span>PG</span></li>
+                    <li>Kyrie Irving <span>SG</span></li>
+                    <li>Klay Thompson <span>SF</span></li>
+                    <li>P.J. Washington <span>PF</span></li>
+                    <li>Daniel Gafford <span>C</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FORUM ===== -->
+<section class="section-home" id="forum">
+    <div class="section-header">
+        <h2 class="section-title"><span>Forum</span> communauté</h2>
+        <a href="login.html" class="section-more">Participer <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="forum-grid">
+        <div class="forum-cat">
+            <div class="forum-cat__icon" style="background: linear-gradient(135deg, #e53935, #b71c1c);">
+                <i class="fa-solid fa-fire"></i>
+            </div>
+            <div class="forum-cat__body">
+                <h3>Débats NBA</h3>
+                <p>Qui est le MVP ? Meilleure équipe de la décennie ? Discutez de tout.</p>
+                <div class="forum-meta">
+                    <span><i class="fa-solid fa-message"></i> 214 topics</span>
+                    <span><i class="fa-solid fa-user"></i> 1 280 messages</span>
+                </div>
+                <div class="forum-last">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Dernier post : <strong>"LeBron ou Jordan ?" — il y a 2h</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="forum-cat">
+            <div class="forum-cat__icon" style="background: linear-gradient(135deg, #f4a400, #e65100);">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="forum-cat__body">
+                <h3>Résultats & Stats</h3>
+                <p>Recaps de matchs, box scores et analyses de performances.</p>
+                <div class="forum-meta">
+                    <span><i class="fa-solid fa-message"></i> 98 topics</span>
+                    <span><i class="fa-solid fa-user"></i> 634 messages</span>
+                </div>
+                <div class="forum-last">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Dernier post : <strong>"Knicks 118-104 Celtics — Brunson 38pts" — il y a 5h</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="forum-cat">
+            <div class="forum-cat__icon" style="background: linear-gradient(135deg, #1565c0, #0d47a1);">
+                <i class="fa-solid fa-right-left"></i>
+            </div>
+            <div class="forum-cat__body">
+                <h3>Trades & Rumeurs</h3>
+                <p>Transferts, free agency, rumeurs et analyses de front office.</p>
+                <div class="forum-meta">
+                    <span><i class="fa-solid fa-message"></i> 156 topics</span>
+                    <span><i class="fa-solid fa-user"></i> 902 messages</span>
+                </div>
+                <div class="forum-last">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Dernier post : <strong>"KD vers OKC ? Les Nets en rebuild" — il y a 1j</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="forum-cat">
+            <div class="forum-cat__icon" style="background: linear-gradient(135deg, #2e7d32, #1b5e20);">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+            <div class="forum-cat__body">
+                <h3>Vos terrains</h3>
+                <p>Partagez les meilleurs spots de basket de votre ville.</p>
+                <div class="forum-meta">
+                    <span><i class="fa-solid fa-message"></i> 47 topics</span>
+                    <span><i class="fa-solid fa-user"></i> 218 messages</span>
+                </div>
+                <div class="forum-last">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Dernier post : <strong>"Terrain flambant neuf à La Villette 🔥" — il y a 3j</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="forum-cta">
+        <a href="login.html" class="btn-forum-cta">
+            <i class="fa-solid fa-user-plus"></i> Rejoindre la communauté
+        </a>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="logo_bb.png" alt="logo" class="footer-logo">
+            <p class="footer-name">Buzzer<span>Beater</span></p>
+            <p class="footer-tagline">Le hub NBA francophone</p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="bb_menu.html">Home</a></li>
+                <li><a href="bb_news.html">News</a></li>
+                <li><a href="bb_teams.html">Teams</a></li>
+                <li><a href="#forum">Forum</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h4>Compte</h4>
+            <ul>
+                <li><a href="login.html">Connexion</a></li>
+                <li><a href="register.html">Inscription</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-socials">
+            <h4>Suivez-nous</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 BuzzerBeater — Fait avec <i class="fa-solid fa-basketball" style="color: rgba(244,94,7,1)"></i> par des fans NBA</p>
+    </div>
+</footer>
+
+<script>
+/* ===== NEWS PREVIEW (3 articles depuis RSS) ===== */
+const RSS_URL = "https://corsproxy.io/?https://rmcsport.bfmtv.com/rss/basket/nba/";
+
+async function loadHomeNews() {
+    const grid = document.getElementById("home-news-grid");
+    try {
+        const res = await fetch(RSS_URL);
+        const text = await res.text();
+        const xml = new DOMParser().parseFromString(text, "text/xml");
+        const items = Array.from(xml.getElementsByTagName("item")).slice(0, 3);
+
+        grid.innerHTML = "";
+        items.forEach(item => {
+            const title = item.querySelector("title")?.textContent || "";
+            const raw = item.querySelector("description")?.textContent || "";
+            const desc = raw.replace(/<[^>]+>/g, "").trim().slice(0, 120) + "…";
+            const pubDate = item.querySelector("pubDate")?.textContent || "";
+            const date = pubDate ? new Date(pubDate).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }) : "";
+            const enclosure = item.querySelector("enclosure");
+            const img = enclosure ? enclosure.getAttribute("url") : "";
+            const link = item.querySelector("link")?.textContent || "#";
+
+            grid.innerHTML += `
+                <a class="news-card" href="${link}" target="_blank" rel="noopener">
+                    ${img ? `<div class="news-card__img" style="background-image:url('${img}')"></div>` : `<div class="news-card__img news-card__img--empty"><i class="fa-solid fa-basketball"></i></div>`}
+                    <div class="news-card__body">
+                        <span class="news-card__date">${date}</span>
+                        <h3>${title}</h3>
+                        <p>${desc}</p>
+                    </div>
+                </a>`;
+        });
+    } catch (e) {
+        grid.innerHTML = `<p class="news-error"><i class="fa-solid fa-circle-exclamation"></i> Impossible de charger les actualités.</p>`;
+    }
+}
+
+loadHomeNews();
+
+/* ===== SMOOTH SCROLL ===== */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth" });
+        }
+    });
+});
+</script>
+
 </body>
 </html>

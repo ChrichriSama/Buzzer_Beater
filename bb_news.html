@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BB News</title>
+    <title>BB News — Buzzer Beater</title>
     <link rel="stylesheet" href="style_teams.css"/>
     <link rel="shortcut icon" href="logo_bb.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/3ca4fe2b8a.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background: #0a0a0a; min-height: 100vh;">
+
+<!-- ===== HEADER ===== -->
 <header>
     <input type="checkbox" id="check">
     <label for="check" class="checkbox">&#9776;</label>
@@ -16,76 +21,145 @@
         <ul>
             <li><img src="logo_bb.png" alt="logo"></li>
             <li><a href="bb_menu.html">Home</a></li>
-            <li><a href="bb_news.html">News</a></li>
+            <li><a href="bb_news.html" class="nav-current">News</a></li>
             <li><a href="bb_teams.html">Teams</a></li>
             <li>Results</li>
             <li>Map</li>
             <li>Message</li>
-            <li>Connect</li>
+            <li><a href="login.html">Connect</a></li>
         </ul>
     </nav>
 </header>
 
-<main id="news-container">
-    <h1>BB News</h1>
-</main>
+<!-- ===== BANNER ===== -->
+<div class="teams-page-banner">
+    <div class="teams-page-banner__inner">
+        <span class="teams-badge"><i class="fa-solid fa-newspaper"></i> Flux RSS en direct</span>
+        <h1>BB <span>News</span></h1>
+        <p>Actualités NBA · Résultats · Transferts · Analyses</p>
+    </div>
+</div>
+
+<!-- ===== NEWS GRID ===== -->
+<section class="section-home" style="padding-top: 50px;">
+    <div class="news-filter" id="news-filter">
+        <button class="filter-btn filter-btn--active" data-filter="all">
+            <i class="fa-solid fa-basketball"></i> Tout
+        </button>
+    </div>
+
+    <div class="news-grid news-grid--full" id="news-container">
+        <!-- Skeletons pendant le chargement -->
+        <div class="news-skeleton"></div>
+        <div class="news-skeleton"></div>
+        <div class="news-skeleton"></div>
+        <div class="news-skeleton"></div>
+        <div class="news-skeleton"></div>
+        <div class="news-skeleton"></div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="logo_bb.png" alt="logo" class="footer-logo">
+            <p class="footer-name">Buzzer<span>Beater</span></p>
+            <p class="footer-tagline">Le hub NBA francophone</p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="bb_menu.html">Home</a></li>
+                <li><a href="bb_news.html">News</a></li>
+                <li><a href="bb_teams.html">Teams</a></li>
+                <li><a href="bb_menu.html#forum">Forum</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h4>Compte</h4>
+            <ul>
+                <li><a href="login.html">Connexion</a></li>
+                <li><a href="register.html">Inscription</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-socials">
+            <h4>Suivez-nous</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 BuzzerBeater — Fait avec <i class="fa-solid fa-basketball" style="color: rgba(244,94,7,1)"></i> par des fans NBA</p>
+    </div>
+</footer>
 
 <script>
-const url = "https://corsproxy.io/?https://rmcsport.bfmtv.com/rss/basket/nba/";
+const RSS_URL = "https://corsproxy.io/?https://rmcsport.bfmtv.com/rss/basket/nba/";
 
-async function getArticles(url) {
+async function loadNews() {
+    const container = document.getElementById("news-container");
     try {
-        const res = await fetch(url);
+        const res = await fetch(RSS_URL);
         const text = await res.text();
+        const xml = new DOMParser().parseFromString(text, "text/xml");
+        const items = Array.from(xml.getElementsByTagName("item"));
 
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(text, "text/xml");
-        const items = xmlDoc.getElementsByTagName("item");
+        container.innerHTML = "";
 
-        const container = document.getElementById("news-container");
-        container.style.display = "flex";
-        container.style.flexDirection = "column";
-        container.style.alignItems = "center";
-        container.style.paddingTop = "60px"; // pour ne pas cacher sous le header
-
-        for (let i = 0; i < items.length; i++) {
-            const item = items[i];
-
-            const articleDiv = document.createElement("div");
-            articleDiv.classList.add("article"); // <-- utilise le style CSS intégré
-
-            const title = document.createElement("h3");
-            title.textContent = item.querySelector("title").textContent;
-            articleDiv.appendChild(title);
-
-            const enclosure = item.querySelector("enclosure");
-            if (enclosure) {
-                const img = new Image();
-                img.src = enclosure.getAttribute("url");
-                articleDiv.appendChild(img);
-            }
-
-            const date = document.createElement("p");
-            date.classList.add("rss-date");
-            const pubDate = item.querySelector("pubDate");
-            if(pubDate) date.textContent = new Date(pubDate.textContent).toLocaleString();
-            articleDiv.appendChild(date);
-
-            const desc = document.createElement("p");
-            const rawDesc = item.querySelector("description")?.textContent || "";
-            desc.textContent = rawDesc.split("<")[0]; // enlève le HTML
-            articleDiv.appendChild(desc);
-
-            container.appendChild(articleDiv);
+        if (items.length === 0) {
+            container.innerHTML = `<p class="news-error"><i class="fa-solid fa-circle-exclamation"></i> Aucun article disponible pour le moment.</p>`;
+            return;
         }
+
+        items.forEach(item => {
+            const title   = item.querySelector("title")?.textContent || "";
+            const rawDesc = item.querySelector("description")?.textContent || "";
+            const desc    = rawDesc.replace(/<[^>]+>/g, "").trim().slice(0, 140) + "…";
+            const pubDate = item.querySelector("pubDate")?.textContent || "";
+            const date    = pubDate
+                ? new Date(pubDate).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
+                : "";
+            const enclosure = item.querySelector("enclosure");
+            const img     = enclosure ? enclosure.getAttribute("url") : "";
+            const link    = item.querySelector("link")?.textContent || "#";
+
+            const card = document.createElement("a");
+            card.className = "news-card";
+            card.href = link;
+            card.target = "_blank";
+            card.rel = "noopener";
+
+            card.innerHTML = `
+                ${img
+                    ? `<div class="news-card__img" style="background-image:url('${img}')"></div>`
+                    : `<div class="news-card__img news-card__img--empty"><i class="fa-solid fa-basketball"></i></div>`
+                }
+                <div class="news-card__body">
+                    <span class="news-card__date"><i class="fa-regular fa-clock"></i> ${date}</span>
+                    <h3>${title}</h3>
+                    <p>${desc}</p>
+                    <span class="news-card__read">Lire l'article <i class="fa-solid fa-arrow-right"></i></span>
+                </div>`;
+
+            container.appendChild(card);
+        });
+
     } catch (err) {
         console.error("Erreur fetch RSS :", err);
-        const container = document.getElementById("news-container");
-        container.innerHTML += "<p>Impossible de charger les news pour le moment.</p>";
+        container.innerHTML = `<p class="news-error"><i class="fa-solid fa-circle-exclamation"></i> Impossible de charger les actualités pour le moment.</p>`;
     }
 }
 
-getArticles(url);
+loadNews();
 </script>
+
 </body>
 </html>
