@@ -53,8 +53,8 @@ import {format} from "timeago.js"
       });
     };
     return (
-
         <div className="App">
+
           <Map
             mapboxAccessToken={import.meta.env.VITE_MAPBOX}
             {...viewport}
