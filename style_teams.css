@@ -6,11 +6,7 @@
     --text: #1d1d1f;
     --blue: #0071e3;
     --a: #2997ff;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
+    --header-height: 45px;
 }
 
 * {
@@ -24,9 +20,14 @@ body {
     font-size: 14px;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 header {
     width: 100%;
-    height: 45px;
+    height: var(--header-height);
     background: rgba(244, 94, 7, 1);
     position: fixed;
     top: 0;
@@ -34,7 +35,16 @@ header {
     z-index: 1000;
 }
 
-ul {
+.checkbox {
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+/* --- NAVBAR PC --- */
+.navbar ul {
     height: 100%;
     width: 100%;
     max-width: 1000px;
@@ -45,34 +55,85 @@ ul {
     color: var(--greylight);
 }
 
-ul li {
+.navbar ul li {
     cursor: pointer;
     list-style: none;
 }
 
-ul li:hover {
-    color: white;
+.navbar ul li a {
+    display: block;
+    padding: 10px 15px; 
+    transition: 0.3s;
+    color: inherit;
 }
 
-ul li img {
+.navbar ul li a:hover {
+    background-image: url('balgris.png'); 
+    background-size: cover;
+    background-position: center;
+    color: purple;
+    font-weight: bold;
+    clip-path: polygon(
+        100% 0,
+        100% 35%,
+        90% 50%,
+        100% 65%,
+        100% 100%,
+        0 100%,
+        0 65%,
+        10% 50%, 
+        0 35%,
+        0 0
+    );
+}
+
+.navbar ul li img {
     width: 38px;
     height: 38px;
+    vertical-align: middle;
 }
 
-div {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 5%;
-    width: 100%;
-    height: 100vh;
+/* --- RESPONSIVE --- */
+@media (max-width: 950px) {
+    .checkbox {
+        display: block;
+        float: right;
+        font-size: 24px;
+        color: white;
+        line-height: var(--header-height);
+        margin-right: 20px;
+        cursor: pointer;
+    }
 
-    /* Paramètres communs appliqués à TOUTES les équipes pour le Parallax */
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.3);
+    .navbar ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: rgba(30, 30, 30, 0.95);
+        backdrop-filter: blur(10px);
+        top: var(--header-height);
+        left: -100%;
+        text-align: center;
+        transition: all 0.5s;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 100px;
+    }
+
+    .navbar ul li {
+        display: block;
+        margin: 20px 0;
+        width: 100%;
+    }
+
+    .navbar ul li a {
+        font-size: 20px;
+        color: white;
+    }
+    
+    #check:checked ~ .navbar ul {
+        left: 0;
+    }
 }
 
 h2 {
@@ -87,10 +148,16 @@ h2 {
     justify-content: space-between;
     gap: 20px;
     padding: 5%;
-}
+    min-height: 100vh;
 
-.txt li {
-    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .nav_left {
@@ -109,92 +176,93 @@ h2 {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
-/* Knicks*/
-div:nth-child(2) { background-image: url(Parallax/fond_knicks.png); 
-background-color: rgba(0, 0, 0, 0.12); }
+.txt li {
+    margin-bottom: 15px;
+}
 
-/* Nets */
-div:nth-child(3) { background-image: url(Parallax/fond_nets.png); }
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        padding: 5% 2%;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .nav_left, .nav_right {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    h2 {
+        font-size: 30px;
+    }
+}
 
-/* Lakers */
-div:nth-child(4) { background-image: url(Parallax/fond_lakers.png); }
+/* --- FONDS PAR ÉQUIPE --- */
+.knicks { background-image: url(Parallax/fond_knicks.png); background-color: rgba(0, 0, 0, 0.12); }
+.nets { background-image: url(Parallax/fond_nets.png); }
+.lakers { background-image: url(Parallax/fond_lakers.png); }
+.heat { background-image: url(Parallax/fond_heat.png); }
+.bucks { background-image: url(Parallax/fond_bucks.png); }
+.bulls { background-image: url(Parallax/6.png); }
+.celtics { background-image: url(Parallax/7.png); }
+.cavaliers { background-image: url(Parallax/8.png); }
+.pistons { background-image: url(Parallax/9.png); }
+.pacers { background-image: url(Parallax/10.png); }
+.magic { background-image: url(Parallax/11.png); }
+.wizards { background-image: url(Parallax/12.png); }
+.raptors { background-image: url(Parallax/14.png); }
+.hawks { background-image: url(Parallax/15.png); }
+.sixers { background-image: url(Parallax/16.png); }
+.hornets { background-image: url(Parallax/17.png); }
+.warriors { background-image: url(Parallax/18.png); }
+.rockets { background-image: url(Parallax/19.png); }
+.suns { background-image: url(Parallax/20.png); }
+.timberwolves { background-image: url(Parallax/21.png); }
+.spurs { background-image: url(Parallax/22.png); }
+.grizzlies { background-image: url(Parallax/23.png); }
+.mavericks { background-image: url(Parallax/24.png); }
+.trailblazers { background-image: url(Parallax/25.png); }
+.nuggets { background-image: url(Parallax/26.png); }
+.clippers { background-image: url(Parallax/27.png); }
+.pelicans { background-image: url(Parallax/28.png); }
+.jazz { background-image: url(Parallax/29.png); }
+.kings { background-image: url(Parallax/30.png); }
+ 
+/* --- ARTICLES NEWS --- */
+.article {
+    background: rgba(255, 255, 255, 0.85); 
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: var(--text);
+}
 
-/* Heat */
-div:nth-child(5) { background-image: url(Parallax/fond_heat.png); }
+.article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
 
-/* Bucks */
-div:nth-child(6) { background-image: url(Parallax/fond_bucks.png); }
+.article h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: var(--blue);
+}
 
-/* Bulls*/
-div:nth-child(7) { background-image: url(Parallax/6.png); }
+.article p {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+}
 
-/* Celtics */
-div:nth-child(8) { background-image: url(Parallax/7.png); }
-
-/* Cavs */
-div:nth-child(9) { background-image: url(Parallax/8.png); }
-
-/* Pistons */
-div:nth-child(10) { background-image: url(Parallax/9.png); }
-
-/* Pacers */
-div:nth-child(11) { background-image: url(Parallax/10.png); }
-
-/* Magic */
-div:nth-child(12) { background-image: url(Parallax/11.png); }
-
-/* Wizards */
-div:nth-child(13) { background-image: url(Parallax/12.png); }
-
-/* --- ON SAUTE L'IMAGE 13 (Doublon) ET ON PASSE DIRECT À 14 --- */
-
-/* Raptors */
-div:nth-child(14) { background-image: url(Parallax/14.png); }
-
-/* Hawks */
-div:nth-child(15) { background-image: url(Parallax/15.png); }
-
-/* 76ers */
-div:nth-child(16) { background-image: url(Parallax/16.png); }
-
-/* Hornets */
-div:nth-child(17) { background-image: url(Parallax/17.png); }
-
-/* Warriors */
-div:nth-child(18) { background-image: url(Parallax/18.png); }
-
-/* Rockets */
-div:nth-child(19) { background-image: url(Parallax/19.png); }
-
-/* Suns */
-div:nth-child(20) { background-image: url(Parallax/20.png); }
-
-/* Wolves */
-div:nth-child(21) { background-image: url(Parallax/21.png); }
-
-/* Spurs */
-div:nth-child(22) { background-image: url(Parallax/22.png); }
-
-/* Grizzlies */
-div:nth-child(23) { background-image: url(Parallax/23.png); }
-
-/* Mavs */
-div:nth-child(24) { background-image: url(Parallax/24.png); }
-
-/* Blazers */
-div:nth-child(25) { background-image: url(Parallax/25.png); }
-
-/* Nuggets */
-div:nth-child(26) { background-image: url(Parallax/26.png); }
-
-/* Clippers */
-div:nth-child(27) { background-image: url(Parallax/27.png); }
-
-/* Pelicans */
-div:nth-child(28) { background-image: url(Parallax/28.png); }
-
-/* Jazz */
-div:nth-child(29) { background-image: url(Parallax/29.png); }
-
-/* Kings  */
-div:nth-child(30) { background-image: url(Parallax/30.png); }
+.article img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

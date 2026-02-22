@@ -1,115 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style_news.css"/>
-    <link rel="shortcut icon" href="logo_bb.png" type="image/x-icon">
     <title>BB News</title>
+    <link rel="stylesheet" href="style_teams.css"/>
+    <link rel="shortcut icon" href="logo_bb.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/3ca4fe2b8a.js"></script>
 </head>
 <body>
-    <header>
+<header>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbox">&#9776;</label>
+    <nav class="navbar">
         <ul>
-            <li><img src= "logo_bb.png" alt= "logo"></li>
-            <li> <a href="bb_menu.html">Home</a></li>
-            <li><a href="bb_news.html">News </a></li>
-            <li> <a href="bb_teams.html">Teams</a></li>
-            <li> Results</li>
-            <li> Map</li>
-            <li> Message</li>
-            <li> Connect</li>
-
+            <li><img src="logo_bb.png" alt="logo"></li>
+            <li><a href="bb_menu.html">Home</a></li>
+            <li><a href="bb_news.html">News</a></li>
+            <li><a href="bb_teams.html">Teams</a></li>
+            <li>Results</li>
+            <li>Map</li>
+            <li>Message</li>
+            <li>Connect</li>
         </ul>
-    </header>
+    </nav>
+</header>
 
+<main id="news-container">
     <h1>BB News</h1>
+</main>
 
-    <script>
+<script>
+const url = "https://corsproxy.io/?https://rmcsport.bfmtv.com/rss/basket/nba/";
 
-    // flux rss l'equipe https://dwh.lequipe.fr/api/edito/rss?path=/Basket/
+async function getArticles(url) {
+    try {
+        const res = await fetch(url);
+        const text = await res.text();
 
-    const url = "https://corsproxy.io/?https://rmcsport.bfmtv.com/rss/basket/nba/";
-    getxt(url);
-    async function getxt(url) {
-    console.log(1);
-    let x = await fetch(url);
-    let y = await x.text();
-    console.log(2);
-    console.log(y.substring());
-    xmlParser = new DOMParser();
-    console.log(3);
-    let xmlDoc = xmlParser.parseFromString(y, "text/xml");
-    console.log(xmlDoc);
-    let item = xmlDoc.getElementsByTagName("item");
-    console.log(item);
-    console.log(item.length);
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(text, "text/xml");
+        const items = xmlDoc.getElementsByTagName("item");
 
-    for (let i=0; i<item.length; i++){
+        const container = document.getElementById("news-container");
+        container.style.display = "flex";
+        container.style.flexDirection = "column";
+        container.style.alignItems = "center";
+        container.style.paddingTop = "60px"; // pour ne pas cacher sous le header
 
-        let paragraphe = document.createElement("div");
-        const body = document.body;
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
 
-        //Item (article)
-        let item_i= xmlDoc.querySelectorAll("item")[i];
+            const articleDiv = document.createElement("div");
+            articleDiv.classList.add("article"); // <-- utilise le style CSS intégré
 
-        //Title (of the article)
-        let title = document.createElement("h3");
-        let title_i= item_i.querySelector("title");
-        title.append(title_i.textContent);
+            const title = document.createElement("h3");
+            title.textContent = item.querySelector("title").textContent;
+            articleDiv.appendChild(title);
 
-        //Image (of the article)
-        const img = new Image();
-        img.src = item_i.querySelector("enclosure").getAttribute("url");
-        document.body.appendChild(img);
+            const enclosure = item.querySelector("enclosure");
+            if (enclosure) {
+                const img = new Image();
+                img.src = enclosure.getAttribute("url");
+                articleDiv.appendChild(img);
+            }
 
-        //Date (of the article)
-        let date= document.createElement("p");
-        let date_i= item_i.querySelector("pubDate");
-        date.append(date_i.textContent);
+            const date = document.createElement("p");
+            date.classList.add("rss-date");
+            const pubDate = item.querySelector("pubDate");
+            if(pubDate) date.textContent = new Date(pubDate.textContent).toLocaleString();
+            articleDiv.appendChild(date);
 
-        //Text Content (of the article) (1st line...)
-        let txt= document.createElement("p");
-        let txt1_i= item_i.querySelector("description")
-        txt.append(txt1_i.textContent.substring(0, txt1_i.textContent.search("<")))
+            const desc = document.createElement("p");
+            const rawDesc = item.querySelector("description")?.textContent || "";
+            desc.textContent = rawDesc.split("<")[0]; // enlève le HTML
+            articleDiv.appendChild(desc);
 
-        //Searching for the rest of the Text Content (Rest line)
-        lettxt = xmlDoc.querySelectorAll("link")[i].textContent;
-        const secondUrl = "############https://corsproxy.io/?" + lettxt;
-        console.log(lettxt)
-        let fetch_txt = await fetch(secondUrl);
-        let fetch_txt_y = await fetch_txt.text();
-        htmlParser_txt = new DOMParser();
-        let htmlDoc_txt = htmlParser_txt.parseFromString(fetch_txt_y, "text/html");
-
-
-
-        let test = htmlDoc_txt.querySelector(".grid_wrapper");
-
-
-
-        if (test){
-            console.log("ok");
-            let begin_txt = test.textContent.indexOf("NBA:");
-            let end_txt = test.textContent.indexOf("NBANBA:", begin_txt + 1);
-            console.log(test.textContent.length);
-            article = test.textContent.substring(begin_txt + 4, end_txt);
-            console.log(article);
-            txt.append(test.textContent.substring(begin_txt, end_txt))
+            container.appendChild(articleDiv);
         }
-
-        else{
-        console.log("error 2nd fetch api")}
-
-
-            paragraphe.appendChild(title);
-            paragraphe.appendChild(img);
-            paragraphe.appendChild(date)
-            paragraphe.appendChild(txt)
-            body.appendChild(paragraphe);
-
+    } catch (err) {
+        console.error("Erreur fetch RSS :", err);
+        const container = document.getElementById("news-container");
+        container.innerHTML += "<p>Impossible de charger les news pour le moment.</p>";
     }
-    }
-    </script>
+}
 
+getArticles(url);
+</script>
 </body>
 </html>
