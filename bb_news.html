@@ -13,11 +13,10 @@
             <li><img src= "logo_bb.png" alt= "logo"></li>
             <li> <a href="bb_menu.html">Home</a></li>
             <li><a href="bb_news.html">News </a></li>
-            <li>Presentation </li>
             <li> <a href="bb_teams.html">Teams</a></li>
             <li> Results</li>
             <li> Map</li>
-            <li> Forum</li>
+            <li> Message</li>
             <li> Connect</li>
 
         </ul>
@@ -75,8 +74,9 @@
 
         //Searching for the rest of the Text Content (Rest line)
         lettxt = xmlDoc.querySelectorAll("link")[i].textContent;
-
-        let fetch_txt = await fetch("https://corsproxy.io/?" + lettxt);
+        const secondUrl = "############https://corsproxy.io/?" + lettxt;
+        console.log(lettxt)
+        let fetch_txt = await fetch(secondUrl);
         let fetch_txt_y = await fetch_txt.text();
         htmlParser_txt = new DOMParser();
         let htmlDoc_txt = htmlParser_txt.parseFromString(fetch_txt_y, "text/html");
