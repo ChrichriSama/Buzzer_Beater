@@ -10,6 +10,7 @@
 }
 
 label{
+    width:max-content;
     color: tomato;
     font-size: 13px;
     border-bottom: .5px solid tomato ;
@@ -33,4 +34,29 @@ label{
     color: purple;
 
 }
+form {
+    width: 250px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
+input,textarea,button,select{
+    width: 220px;
+    border: none;
+    border-bottom: 1px solid grey ;
+}
+
+input::placeholder, textarea::placeholder{
+    width: 220px;
+    font-size: 12px;
+}
+
+.submitButton{
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color:tomato;
+}

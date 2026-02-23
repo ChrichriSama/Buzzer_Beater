@@ -15,7 +15,3 @@ export default defineConfig({
   }
 })
 // https://vite.dev/config/
-<<<<<<< HEAD
-
-=======
->>>>>>> 07c2008094358cc1969e4291c25b1c25e880ef8d
