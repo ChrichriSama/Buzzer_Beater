@@ -51,7 +51,7 @@ header {
     display: none;
 }
 
-/* --- NAVBAR PC --- */
+/* Style de la barre de navigation sur PC */
 .navbar ul {
     height: 100%;
     width: 100%;
@@ -75,6 +75,7 @@ header {
     color: inherit;
 }
 
+/* Effet au survol (Hover) */
 .navbar ul li a:hover {
     background-image: url('balgris.png');
     background-size: cover;

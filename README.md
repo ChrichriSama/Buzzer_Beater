@@ -71,7 +71,7 @@ https://www.youtube.com/watch?v=9oEQvI7K-rA
 -------------------------------------------------------------------
 # ToDo
 --C
-[]finir page teams et automatiser les textes et images en background
+[x]finir page teams et automatiser les textes et images en background
 []corriger css pour news
 []rendre les pages responsives
 []mode sombre?
