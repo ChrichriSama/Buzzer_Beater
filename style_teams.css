@@ -1,6 +1,4 @@
-/* ===============================
-   BUZZER BEATER — STYLES GLOBAUX
-   =============================== */
+/* BUZZER BEATER — STYLES GLOBAUX */
 
 :root {
     --greydark: #333333;
@@ -103,7 +101,7 @@ header {
     vertical-align: middle;
 }
 
-/* ---- PAGE COURANTE — violet ---- */
+/* ---- PAGE COURANTE — violet -(nav active)???? */
 .nav-current,
 .nav-current a,
 .nav-active a {
@@ -153,6 +151,8 @@ header {
     #check:checked ~ .navbar ul {
         left: 0;
     }
+
+    
 }
 
 h2 {
@@ -166,9 +166,7 @@ h2 {
     text-shadow: 0 2px 12px rgba(0,0,0,0.6);
 }
 
-/* ================================
-   BANNER PAGE TEAMS / NEWS
-   ================================ */
+/*  BANNER PAGE TEAMS / NEWS  */
 .teams-page-banner {
     padding-top: var(--header-height);
     background: #0a0a0a;
@@ -220,9 +218,7 @@ h2 {
     font-weight: 500;
 }
 
-/* ================================
-   CONTENU ÉQUIPES — glassmorphism
-   ================================ */
+/* CONTENU ÉQUIPES */
 .nav_left {
     position: relative;
     z-index: 2;
@@ -370,9 +366,8 @@ h2 {
     }
 }
 
-/* ================================
-   FONDS PAR ÉQUIPE
-   ================================ */
+/*   FONDS PAR ÉQUIPE  */
+
 .knicks      { background-image: url(Parallax/fond_knicks.png); background-color: rgba(0,0,0,0.12); }
 .nets        { background-image: url(Parallax/fond_nets.png); }
 .lakers      { background-image: url(Parallax/fond_lakers.png); }
@@ -403,9 +398,7 @@ h2 {
 .jazz        { background-image: url(Parallax/29.png); }
 .kings       { background-image: url(Parallax/30.png); }
 
-/* ================================
-   LOGIN PAGE
-   ================================ */
+/*  LOGIN PAGE */
 .login-body {
     background: #111;
     overflow: hidden;
@@ -586,40 +579,6 @@ h2 {
     color: rgba(244, 94, 7, 0.9);
 }
 
-.login-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: -4px;
-}
-
-.remember-me {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 0.84rem;
-    user-select: none;
-}
-
-.remember-me input[type="checkbox"] {
-    width: 15px;
-    height: 15px;
-    accent-color: rgba(244, 94, 7, 1);
-    cursor: pointer;
-}
-
-.forgot-link {
-    font-size: 0.82rem;
-    color: rgba(244, 94, 7, 0.80);
-    transition: color 0.2s;
-}
-
-.forgot-link:hover {
-    color: rgba(244, 94, 7, 1);
-    text-decoration: underline;
-}
 
 .btn-login {
     width: 100%;
@@ -676,56 +635,7 @@ h2 {
     text-decoration: underline;
 }
 
-.login-divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 22px 0 16px;
-    color: rgba(255, 255, 255, 0.28);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-}
 
-.login-divider::before,
-.login-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.10);
-}
-
-.social-login {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.social-btn {
-    padding: 11px 16px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 0.84rem;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
-}
-
-.social-btn:hover {
-    background: rgba(255, 255, 255, 0.10);
-    border-color: rgba(255, 255, 255, 0.22);
-    transform: translateY(-1px);
-}
-
-.social-btn.google i  { color: #ea4335; }
-.social-btn.discord i { color: #7289da; }
 
 @media (max-width: 768px) {
     .login-wrapper {
@@ -739,17 +649,9 @@ h2 {
     .login-brand h1 {
         font-size: 1.65rem;
     }
-
-    .login-options {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
 }
 
-/* ================================
-   REGISTER PAGE EXTRAS
-   ================================ */
+/* REGISTER PAGE*/
 .register-wrapper {
     max-width: 500px;
 }
@@ -784,75 +686,13 @@ h2 {
     display: block;
 }
 
-.strength-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 6px;
-}
-
-.strength-track {
-    flex: 1;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.10);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.strength-fill {
-    height: 100%;
-    width: 0%;
-    border-radius: 4px;
-    transition: width 0.35s ease, background 0.35s ease;
-}
-
-.strength-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    min-width: 55px;
-    text-align: right;
-    transition: color 0.35s;
-}
-
-.terms-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 0.83rem;
-    line-height: 1.5;
-    user-select: none;
-}
-
-.terms-label input[type="checkbox"] {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-    margin-top: 2px;
-    accent-color: rgba(244, 94, 7, 1);
-    cursor: pointer;
-}
-
-.terms-label a {
-    color: rgba(244, 94, 7, 0.85);
-    transition: color 0.2s;
-}
-
-.terms-label a:hover {
-    color: white;
-    text-decoration: underline;
-}
-
 @media (max-width: 768px) {
     .register-wrapper {
         max-width: 100%;
     }
 }
 
-/* ================================
-   HOME PAGE — HERO
-   ================================ */
+/* HOME PAGE — HERO */
 .hero {
     position: relative;
     height: 100vh;
@@ -873,49 +713,8 @@ h2 {
     transform: scale(1.04);
 }
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        160deg,
-        rgba(0,0,0,0.82) 0%,
-        rgba(15,15,15,0.65) 45%,
-        rgba(244, 94, 7, 0.10) 70%,
-        rgba(0,0,0,0.80) 100%
-    );
-    z-index: 1;
-}
 
-.hero-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 1;
-}
 
-.hero-orb--a {
-    width: 500px;
-    height: 500px;
-    background: rgba(244, 94, 7, 0.18);
-    top: -100px;
-    right: -100px;
-    animation: orb-drift 10s ease-in-out infinite alternate;
-}
-
-.hero-orb--b {
-    width: 350px;
-    height: 350px;
-    background: rgba(100, 30, 200, 0.12);
-    bottom: -60px;
-    left: -60px;
-    animation: orb-drift 14s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes orb-drift {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(30px, 20px) scale(1.08); }
-}
 
 .hero-content {
     position: relative;
@@ -969,7 +768,7 @@ h2 {
 }
 
 .hero-sub {
-    color: rgba(255, 255, 255, 0.68);
+    color: white;
     font-size: clamp(0.95rem, 2vw, 1.15rem);
     font-weight: 400;
     line-height: 1.65;
@@ -1031,29 +830,13 @@ h2 {
     transform: translateY(-3px);
 }
 
-.hero-scroll {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    color: rgba(255,255,255,0.5);
-    font-size: 1.2rem;
-    text-decoration: none;
-    animation: bounce 2s ease-in-out infinite;
-    transition: color 0.2s;
-}
-
-.hero-scroll:hover { color: rgba(244,94,7,0.9); }
 
 @keyframes bounce {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50%       { transform: translateX(-50%) translateY(8px); }
 }
 
-/* ================================
-   FEATURES BAR
-   ================================ */
+/*FEATURES BAR */
 .features {
     background: #111;
     padding: 60px 5%;
@@ -1117,9 +900,7 @@ h2 {
     line-height: 1.55;
 }
 
-/* ================================
-   SECTIONS COMMUNES
-   ================================ */
+/* SECTIONS COMMUNES */
 .section-home {
     padding: 80px 5%;
     background: #0d0d0d;
@@ -1164,9 +945,7 @@ h2 {
 
 .section-more:hover { color: white; }
 
-/* ================================
-   NEWS CARDS
-   ================================ */
+/* NEWS  */
 .news-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1180,12 +959,6 @@ h2 {
     border-radius: 16px;
     background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.05) 75%);
     background-size: 200% 100%;
-    animation: shimmer 1.4s infinite;
-}
-
-@keyframes shimmer {
-    0%   { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
 }
 
 .news-card {
@@ -1270,67 +1043,7 @@ h2 {
     gap: 10px;
 }
 
-.news-error {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: rgba(255,255,255,0.4);
-    font-size: 0.9rem;
-    padding: 40px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-/* ================================
-   NEWS PAGE — FILTRE
-   ================================ */
-.news-grid--full {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 1200px;
-}
-
-.news-filter {
-    display: flex;
-    gap: 10px;
-    max-width: 1200px;
-    margin: 0 auto 30px;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 8px 18px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.55);
-    font-size: 0.82rem;
-    font-weight: 600;
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-}
-
-.filter-btn:hover {
-    background: rgba(244,94,7,0.10);
-    border-color: rgba(244,94,7,0.35);
-    color: rgba(244,94,7,1);
-}
-
-.filter-btn--active {
-    background: rgba(244,94,7,0.15);
-    border-color: rgba(244,94,7,0.50);
-    color: rgba(244,94,7,1);
-}
-
-/* ================================
-   TEAMS SCROLL — HOME
-   ================================ */
+/* TEAMS SCROLL — HOME */
 .teams-scroll {
     display: flex;
     gap: 20px;
@@ -1343,9 +1056,6 @@ h2 {
     scroll-snap-type: x mandatory;
 }
 
-.teams-scroll::-webkit-scrollbar { height: 4px; }
-.teams-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
-.teams-scroll::-webkit-scrollbar-thumb { background: rgba(244,94,7,0.5); border-radius: 4px; }
 
 .team-card {
     position: relative;
@@ -1542,9 +1252,7 @@ h2 {
     filter: brightness(1.08);
 }
 
-/* ================================
-   FOOTER
-   ================================ */
+/* FOOTER */
 .site-footer {
     background: #080808;
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -1582,8 +1290,7 @@ h2 {
 .footer-name span { color: rgba(244,94,7,1); }
 .footer-tagline { font-size: 0.80rem; }
 
-.footer-links h4,
-.footer-socials h4 {
+.footer-links h4 {
     font-size: 0.78rem;
     font-weight: 700;
     color: white;
@@ -1608,32 +1315,7 @@ h2 {
 
 .footer-links a:hover { color: rgba(244,94,7,1); }
 
-.social-icons {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
 
-.social-icons a {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.10);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.60);
-    font-size: 0.95rem;
-    transition: background 0.2s, color 0.2s, transform 0.2s;
-    text-decoration: none;
-}
-
-.social-icons a:hover {
-    background: rgba(244,94,7,0.18);
-    color: rgba(244,94,7,1);
-    transform: translateY(-2px);
-}
 
 .footer-bottom {
     max-width: 1200px;
@@ -1644,9 +1326,7 @@ h2 {
     color: rgba(255,255,255,0.28);
 }
 
-/* ================================
-   RESPONSIVE
-   ================================ */
+/*RESPONSIVE */
 @media (max-width: 1024px) {
     .features-grid {
         grid-template-columns: repeat(2, 1fr);

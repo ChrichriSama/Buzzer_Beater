@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="style_teams.css"/>
     <link rel="shortcut icon" href="logo_bb.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/3ca4fe2b8a.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
 </head>
 <body style="background: #0a0a0a; min-height: 100vh;">
 
@@ -40,22 +38,9 @@
     </div>
 </div>
 
-<!-- ===== NEWS GRID ===== -->
+<!-- ===== NEWS GRILLE ===== -->
 <section class="section-home" style="padding-top: 50px;">
-    <div class="news-filter" id="news-filter">
-        <button class="filter-btn filter-btn--active" data-filter="all">
-            <i class="fa-solid fa-basketball"></i> Tout
-        </button>
-    </div>
-
     <div class="news-grid news-grid--full" id="news-container">
-        <!-- Skeletons pendant le chargement -->
-        <div class="news-skeleton"></div>
-        <div class="news-skeleton"></div>
-        <div class="news-skeleton"></div>
-        <div class="news-skeleton"></div>
-        <div class="news-skeleton"></div>
-        <div class="news-skeleton"></div>
     </div>
 </section>
 
@@ -85,19 +70,9 @@
                 <li><a href="register.html">Inscription</a></li>
             </ul>
         </div>
-
-        <div class="footer-socials">
-            <h4>Suivez-nous</h4>
-            <div class="social-icons">
-                <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-        </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2025 BuzzerBeater — Fait avec <i class="fa-solid fa-basketball" style="color: rgba(244,94,7,1)"></i> par des fans NBA</p>
+        <p>&copy; 2025 BuzzerBeater — Fait avec <i class="fa-solid fa-basketball" style="color: rgba(244,94,7,1)"></i> par Yanzer92i78 et Christopher</p>
     </div>
 </footer>
 
@@ -106,7 +81,6 @@ const RSS_URL = "https://corsproxy.io/?https://rmcsport.bfmtv.com/rss/basket/nba
 
 async function loadNews() {
     const container = document.getElementById("news-container");
-    try {
         const res = await fetch(RSS_URL);
         const text = await res.text();
         const xml = new DOMParser().parseFromString(text, "text/xml");
@@ -152,10 +126,6 @@ async function loadNews() {
             container.appendChild(card);
         });
 
-    } catch (err) {
-        console.error("Erreur fetch RSS :", err);
-        container.innerHTML = `<p class="news-error"><i class="fa-solid fa-circle-exclamation"></i> Impossible de charger les actualités pour le moment.</p>`;
-    }
 }
 
 loadNews();
