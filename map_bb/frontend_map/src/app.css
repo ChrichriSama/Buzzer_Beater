@@ -1,3 +1,5 @@
+
+
 .App{
     width: 100vh;
     height: 100vh;
@@ -14,6 +16,7 @@ label{
     color: tomato;
     font-size: 13px;
     border-bottom: .5px solid tomato ;
+    
 
 }
 
@@ -46,6 +49,7 @@ input,textarea,button,select{
     width: 220px;
     border: none;
     border-bottom: 1px solid grey ;
+    
 }
 
 input::placeholder, textarea::placeholder{
@@ -79,10 +83,15 @@ input::placeholder, textarea::placeholder{
     cursor: pointer;
     font-weight: 500;
     width: fit-content;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 
 .logout{
-    background-color: tomato;
+    background-color: red;
 }
 
 .login{
@@ -93,7 +102,7 @@ input::placeholder, textarea::placeholder{
 }
 
 .nav-link{
-    background-color: #2c6e8a;
+    background-color: indigo;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -101,7 +110,7 @@ input::placeholder, textarea::placeholder{
 
 .nav-user{
     background: transparent;
-    color: rgba(244,94,7,1);
+    background-color: limegreen;
     font-weight: 700;
     font-size: 0.82rem;
     border: 1px solid rgba(244,94,7,0.40);

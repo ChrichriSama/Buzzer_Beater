@@ -17,10 +17,12 @@ import Login from './components/Login';
     const [currentUser, setCurrentUser] = useState(myStorage.getItem("user"));
     const [pins, setPins]= useState([]);
     const [currentPlaceId,setCurrentPlaceId] = useState(null);
+   
 
     // Create new place
     const [newPlace,setnewPlace] = useState(null);
     const [Title,setTitle] = useState("");
+    const [address,setAddress] = useState("");
     const [Desc,setDesc] = useState("");
     const [Rating,setRating] = useState(0);
     const [showRegister, setShowRegister] = useState(false);
@@ -180,8 +182,10 @@ import Login from './components/Login';
                          
                           <label>Place</label> 
                           <input placeholder='Enter a Place' onChange={(e)=>setTitle(e.target.value)}/>
+                          <label>Address</label>
+                          <textarea placeholder='Where is this playground?' onChange={(e)=>setAddress(e.target.value)}/>
                           <label>Review</label>
-                          <textarea placeholder='How is this playground?' onChange={(e)=>setDesc(e.target.value)}/>
+                          <textarea placeholder='How is it?' onChange={(e)=>setDesc(e.target.value)}/>
                           <label>Rating</label>
                           <select onChange={(e)=>setRating(e.target.value)}>
                               <option value="1">1</option>
