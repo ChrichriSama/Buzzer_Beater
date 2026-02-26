@@ -101,21 +101,21 @@ import Login from './components/Login';
       myStorage.removeItem("user");
       setCurrentUser(null);
       // Vide aussi la session sur localhost:3000 et redirige vers login
-      window.location.href = 'http://localhost:3000/login.html?logout=1';
+      window.location.href = 'http://localhost:3000/pgs_prjts/login.html?logout=1';
     }
 
     return (
         <div className="App">
           {currentUser ? (
                   <div className='navbar'>
-                  <a className='button nav-link' href='http://localhost:3000/bb_menu.html'>Accueil</a>
-                  <a className='button nav-link' href={`http://localhost:3000/bb_forum.html?user=${encodeURIComponent(currentUser)}`}>Forum</a>
+                  <a className='button nav-link' href='http://localhost:3000/pgs_prjts/bb_menu.html'>Accueil</a>
+                  <a className='button nav-link' href={`http://localhost:3000/pgs_prjts/bb_forum.html?user=${encodeURIComponent(currentUser)}`}>Forum</a>
                   <span className='button nav-user'>{currentUser}</span>
                   <button className='button logout' onClick={handleLogout}>Déco</button>
                   </div>
               ) : (<div className='navbar'>
-                  <a className='button nav-link' href='http://localhost:3000/bb_menu.html'>Accueil</a>
-                  <a className='button nav-link' href='http://localhost:3000/bb_forum.html'>Forum</a>
+                  <a className='button nav-link' href='http://localhost:3000/pgs_prjts/bb_menu.html'>Accueil</a>
+                  <a className='button nav-link' href='http://localhost:3000/pgs_prjts/bb_forum.html'>Forum</a>
                   <button className='button login' onClick={()=>setShowLogin(true)}>Connexion</button>
                   <button className='button register' onClick={()=>setShowRegister(true)}>Créer compte</button>
                 </div>)}

@@ -77,7 +77,7 @@ header {
 
 /* Effet au survol (Hover) */
 .navbar ul li a:hover {
-    background-image: url('balgris.png');
+    background-image: url('imgs_prjt/balgris.png');
     background-size: cover;
     background-position: center;
     color: purple;
@@ -402,35 +402,35 @@ h2 {
 
 /*   FONDS PAR ÉQUIPE  */
 
-.knicks      { background-image: url(Parallax/fond_knicks.png); background-color: rgba(0,0,0,0.12); }
-.nets        { background-image: url(Parallax/fond_nets.png); }
-.lakers      { background-image: url(Parallax/fond_lakers.png); }
-.heat        { background-image: url(Parallax/fond_heat.png); }
-.bucks       { background-image: url(Parallax/fond_bucks.png); }
-.bulls       { background-image: url(Parallax/6.png); }
-.celtics     { background-image: url(Parallax/7.png); }
-.cavaliers   { background-image: url(Parallax/8.png); }
-.pistons     { background-image: url(Parallax/9.png); }
-.pacers      { background-image: url(Parallax/10.png); }
-.magic       { background-image: url(Parallax/11.png); }
-.wizards     { background-image: url(Parallax/12.png); }
-.raptors     { background-image: url(Parallax/14.png); }
-.hawks       { background-image: url(Parallax/15.png); }
-.sixers      { background-image: url(Parallax/16.png); }
-.hornets     { background-image: url(Parallax/17.png); }
-.warriors    { background-image: url(Parallax/18.png); }
-.rockets     { background-image: url(Parallax/19.png); }
-.suns        { background-image: url(Parallax/20.png); }
-.timberwolves{ background-image: url(Parallax/21.png); }
-.spurs       { background-image: url(Parallax/22.png); }
-.grizzlies   { background-image: url(Parallax/23.png); }
-.mavericks   { background-image: url(Parallax/24.png); }
-.trailblazers{ background-image: url(Parallax/25.png); }
-.nuggets     { background-image: url(Parallax/26.png); }
-.clippers    { background-image: url(Parallax/27.png); }
-.pelicans    { background-image: url(Parallax/28.png); }
-.jazz        { background-image: url(Parallax/29.png); }
-.kings       { background-image: url(Parallax/30.png); }
+.knicks      { background-image: url(imgs_prjt/Parallax/fond_knicks.png); background-color: rgba(0,0,0,0.12); }
+.nets        { background-image: url(imgs_prjt/Parallax/fond_nets.png); }
+.lakers      { background-image: url(imgs_prjt/Parallax/fond_lakers.png); }
+.heat        { background-image: url(imgs_prjt/Parallax/fond_heat.png); }
+.bucks       { background-image: url(imgs_prjt/Parallax/fond_bucks.png); }
+.bulls       { background-image: url(imgs_prjt/Parallax/6.png); }
+.celtics     { background-image: url(imgs_prjt/Parallax/7.png); }
+.cavaliers   { background-image: url(imgs_prjt/Parallax/8.png); }
+.pistons     { background-image: url(imgs_prjt/Parallax/9.png); }
+.pacers      { background-image: url(imgs_prjt/Parallax/10.png); }
+.magic       { background-image: url(imgs_prjt/Parallax/11.png); }
+.wizards     { background-image: url(imgs_prjt/Parallax/12.png); }
+.raptors     { background-image: url(imgs_prjt/Parallax/14.png); }
+.hawks       { background-image: url(imgs_prjt/Parallax/15.png); }
+.sixers      { background-image: url(imgs_prjt/Parallax/16.png); }
+.hornets     { background-image: url(imgs_prjt/Parallax/17.png); }
+.warriors    { background-image: url(imgs_prjt/Parallax/18.png); }
+.rockets     { background-image: url(imgs_prjt/Parallax/19.png); }
+.suns        { background-image: url(imgs_prjt/Parallax/20.png); }
+.timberwolves{ background-image: url(imgs_prjt/Parallax/21.png); }
+.spurs       { background-image: url(imgs_prjt/Parallax/22.png); }
+.grizzlies   { background-image: url(imgs_prjt/Parallax/23.png); }
+.mavericks   { background-image: url(imgs_prjt/Parallax/24.png); }
+.trailblazers{ background-image: url(imgs_prjt/Parallax/25.png); }
+.nuggets     { background-image: url(imgs_prjt/Parallax/26.png); }
+.clippers    { background-image: url(imgs_prjt/Parallax/27.png); }
+.pelicans    { background-image: url(imgs_prjt/Parallax/28.png); }
+.jazz        { background-image: url(imgs_prjt/Parallax/29.png); }
+.kings       { background-image: url(imgs_prjt/Parallax/30.png); }
 
 /*  LOGIN PAGE */
 .login-body {
@@ -445,7 +445,7 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('basket_stade.jpg');
+    background-image: url('imgs_prjt/basket_stade.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -740,7 +740,7 @@ h2 {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('basket_stade.jpg');
+    background-image: url('imgs_prjt/basket_stade.jpg');
     background-size: cover;
     background-position: center 30%;
     background-attachment: fixed;

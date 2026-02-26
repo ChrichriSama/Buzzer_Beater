@@ -1,0 +1,5 @@
+cd "map_bb/backend_map"
+node index.js
+
+cd "map_bb/frontend_map"
+npm run dev ou npm start
