@@ -28,7 +28,7 @@ export default function Register({setShowRegister}){
             console.log("Error with Registration: " + err)};
     }
     return(
-        <div className='registerContainer'>x
+        <div className='registerContainer'>
             <div className='logo'>
                 <SportsBasketballIcon/>
                 Welcome

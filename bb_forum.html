@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum — Buzzer Beater</title>
+    <link rel="stylesheet" href="style_teams.css"/>
+    <link rel="shortcut icon" href="logo_bb.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/3ca4fe2b8a.js"></script>
+</head>
+<body style="background: #0a0a0a; min-height: 100vh;">
+
+<!-- ===== HEADER ===== -->
+<header>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbox">&#9776;</label>
+    <nav class="navbar">
+        <ul>
+            <li><img src="logo_bb.png" alt="logo"></li>
+            <li><a href="bb_menu.html">Home</a></li>
+            <li><a href="bb_news.html">News</a></li>
+            <li><a href="bb_teams.html">Teams</a></li>
+            <li>Results</li>
+            <li><a href="http://localhost:5173">Map</a></li>
+            <li><a href="bb_forum.html" class="nav-current">Forum</a></li>
+            <li><a href="login.html" id="nav-auth-link">Connect</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ===== BANNER ===== -->
+<div class="teams-page-banner">
+    <div class="teams-page-banner__inner">
+        <span class="teams-badge"><i class="fa-solid fa-comments"></i> Discussions NBA</span>
+        <h1>BB <span>Forum</span></h1>
+        <p>Partage tes analyses · Débats · Réactions en direct</p>
+    </div>
+</div>
+
+<!-- ===== CONTENU ===== -->
+<section class="section-home" style="padding-top: 50px; padding-bottom: 80px;">
+
+    <!-- Message si non connecté -->
+    <div id="forum-guest-msg" class="forum-guest" style="display:none;">
+        <i class="fa-solid fa-lock"></i>
+        <p>Tu dois être <a href="login.html">connecté</a> pour poster un message.</p>
+    </div>
+
+    <!-- Formulaire nouveau post (connecté uniquement) -->
+    <div id="forum-form-wrap" class="forum-new-post" style="display:none;">
+        <h2><i class="fa-solid fa-pen-to-square"></i> Nouveau message</h2>
+        <form id="post-form">
+            <input type="text" id="post-title" placeholder="Titre du post (max 150 caractères)" maxlength="150" required>
+            <textarea id="post-content" placeholder="Écris ton message ici..." rows="4" required></textarea>
+            <button type="submit" class="forum-btn forum-btn--primary">
+                <i class="fa-solid fa-paper-plane"></i> Publier
+            </button>
+            <p id="post-error" class="forum-error" style="display:none;"></p>
+        </form>
+    </div>
+
+    <!-- Liste des posts -->
+    <div id="posts-container" class="forum-posts-list">
+        <div class="forum-loading"><i class="fa-solid fa-spinner fa-spin"></i> Chargement...</div>
+    </div>
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="logo_bb.png" alt="logo" class="footer-logo">
+            <p class="footer-name">Buzzer<span>Beater</span></p>
+            <p class="footer-tagline">Le hub NBA francophone</p>
+        </div>
+        <div class="footer-links">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="bb_menu.html">Home</a></li>
+                <li><a href="bb_news.html">News</a></li>
+                <li><a href="bb_teams.html">Teams</a></li>
+                <li><a href="bb_forum.html">Forum</a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h4>Compte</h4>
+            <ul>
+                <li><a href="login.html">Connexion</a></li>
+                <li><a href="register.html">Inscription</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 BuzzerBeater — Fait avec <i class="fa-solid fa-basketball" style="color: rgba(244,94,7,1)"></i> par Yanzer92i78 et Christopher</p>
+    </div>
+</footer>
+
+<script>
+const API = 'http://localhost:3000/api/forum';
+
+// Gérer ?user= venant de la map et ?logout=1
+(function() {
+    const p = new URLSearchParams(window.location.search);
+    if (p.get('logout') === '1') {
+        localStorage.removeItem('user');
+        window.history.replaceState(null, '', window.location.pathname);
+    }
+    const u = p.get('user');
+    if (u) {
+        localStorage.setItem('user', u);
+        window.history.replaceState(null, '', window.location.pathname);
+    }
+})();
+
+const currentUser = localStorage.getItem('user') || null;
+
+/* --- Auth UI --- */
+(function initAuth() {
+    const authLink = document.getElementById('nav-auth-link');
+    if (currentUser) {
+        authLink.textContent = currentUser;
+        authLink.href = '#';
+        authLink.title = 'Connecté en tant que ' + currentUser;
+        document.getElementById('forum-form-wrap').style.display = 'block';
+    } else {
+        document.getElementById('forum-guest-msg').style.display = 'flex';
+    }
+})();
+
+/* --- Charger les posts --- */
+async function loadPosts() {
+    const container = document.getElementById('posts-container');
+    try {
+        const res = await fetch(API + '/posts');
+        const posts = await res.json();
+        if (!Array.isArray(posts) || posts.length === 0) {
+            container.innerHTML = '<p class="forum-empty"><i class="fa-solid fa-basketball"></i> Aucun post pour l\'instant. Sois le premier !</p>';
+            return;
+        }
+        container.innerHTML = '';
+        posts.forEach(post => container.appendChild(buildPostCard(post)));
+    } catch(e) {
+        container.innerHTML = '<p class="forum-error-msg"><i class="fa-solid fa-triangle-exclamation"></i> Impossible de charger les posts.</p>';
+    }
+}
+
+/* --- Construire une carte post --- */
+function buildPostCard(post) {
+    const card = document.createElement('div');
+    card.className = 'forum-post-card';
+    card.dataset.id = post._id;
+
+    const date = new Date(post.createdAt).toLocaleDateString('fr-FR', {
+        day: 'numeric', month: 'short', year: 'numeric'
+    });
+
+    const isOwner = currentUser && currentUser === post.username;
+
+    card.innerHTML = `
+        <div class="forum-post-header">
+            <div class="forum-post-meta">
+                <span class="forum-post-author"><i class="fa-solid fa-user-circle"></i> ${escHtml(post.username)}</span>
+                <span class="forum-post-date"><i class="fa-regular fa-clock"></i> ${date}</span>
+            </div>
+            ${isOwner ? `<button class="forum-btn forum-btn--danger forum-delete-btn" data-id="${post._id}"><i class="fa-solid fa-trash"></i></button>` : ''}
+        </div>
+        <h3 class="forum-post-title">${escHtml(post.title)}</h3>
+        <p class="forum-post-content">${escHtml(post.content)}</p>
+
+        <div class="forum-replies">
+            ${post.replies.length > 0 ? post.replies.map(r => buildReplyHtml(r)).join('') : '<p class="forum-no-replies">Aucune réponse pour l\'instant.</p>'}
+        </div>
+
+        ${currentUser ? `
+        <form class="forum-reply-form" data-post-id="${post._id}">
+            <input type="text" placeholder="Écris une réponse..." required maxlength="500">
+            <button type="submit" class="forum-btn forum-btn--secondary"><i class="fa-solid fa-reply"></i> Répondre</button>
+        </form>` : ''}
+    `;
+
+    /* --- Delete post --- */
+    const delBtn = card.querySelector('.forum-delete-btn');
+    if (delBtn) {
+        delBtn.addEventListener('click', () => deletePost(post._id, card));
+    }
+
+    /* --- Reply form --- */
+    const replyForm = card.querySelector('.forum-reply-form');
+    if (replyForm) {
+        replyForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = this.querySelector('input');
+            const content = input.value.trim();
+            if (!content) return;
+            const btn = this.querySelector('button');
+            btn.disabled = true;
+            try {
+                const res = await fetch(`${API}/posts/${post._id}/reply`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: currentUser, content })
+                });
+                if (!res.ok) throw new Error();
+                const updated = await res.json();
+                const repliesDiv = card.querySelector('.forum-replies');
+                repliesDiv.innerHTML = updated.replies.map(r => buildReplyHtml(r)).join('');
+                input.value = '';
+            } catch(err) {
+                alert('Erreur lors de l\'envoi de la réponse.');
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    }
+
+    return card;
+}
+
+/* --- HTML d'une réponse --- */
+function buildReplyHtml(reply) {
+    const date = new Date(reply.createdAt).toLocaleDateString('fr-FR', {
+        day: 'numeric', month: 'short', year: 'numeric'
+    });
+    return `
+        <div class="forum-reply">
+            <span class="forum-reply-author"><i class="fa-solid fa-user"></i> ${escHtml(reply.username)}</span>
+            <span class="forum-reply-date">${date}</span>
+            <p>${escHtml(reply.content)}</p>
+        </div>`;
+}
+
+/* --- Supprimer un post --- */
+async function deletePost(postId, cardEl) {
+    if (!confirm('Supprimer ce post ?')) return;
+    try {
+        const res = await fetch(`${API}/posts/${postId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: currentUser })
+        });
+        if (!res.ok) throw new Error();
+        cardEl.remove();
+    } catch(e) {
+        alert('Impossible de supprimer ce post.');
+    }
+}
+
+/* --- Nouveau post --- */
+document.getElementById('post-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const title   = document.getElementById('post-title').value.trim();
+    const content = document.getElementById('post-content').value.trim();
+    const errEl   = document.getElementById('post-error');
+    errEl.style.display = 'none';
+
+    const btn = this.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Publication...';
+
+    try {
+        const res = await fetch(API + '/posts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: currentUser, title, content })
+        });
+        if (!res.ok) throw new Error();
+        const newPost = await res.json();
+        const container = document.getElementById('posts-container');
+        const emptyMsg = container.querySelector('.forum-empty');
+        if (emptyMsg) emptyMsg.remove();
+        container.prepend(buildPostCard(newPost));
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+    } catch(err) {
+        errEl.textContent = 'Erreur lors de la publication.';
+        errEl.style.display = 'block';
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Publier';
+    }
+});
+
+/* --- Utilitaire XSS--- */
+function escHtml(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+loadPosts();
+</script>
+<script src="navbar-auth.js"></script>
+
+</body>
+</html>

@@ -20,8 +20,8 @@
             <li><a href="bb_news.html">News</a></li>
             <li><a href="bb_teams.html">Teams</a></li>
             <li>Results</li>
-            <li>Map</li>
-            <li>Message</li>
+            <li><a href="http://localhost:5173">Map</a></li>
+            <li><a href="bb_forum.html">Forum</a></li>
             <li class="nav-active"><a href="login.html">Connect</a></li>
         </ul>
     </nav>
@@ -139,6 +139,7 @@
     }
 
     /* --- Verif mot de passe --- */
+    const pwdInput = document.getElementById('password');
     const confirmInput = document.getElementById('confirm-password');
     const matchHint = document.getElementById('match-hint');
 
@@ -173,7 +174,58 @@
             emailStatus.innerHTML = '<i class="fa-solid fa-check"></i>';
         }
     });
+
+    /* --- Inscription via API --- */
+    document.getElementById('register-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const email    = document.getElementById('email').value.trim();
+        const password = pwdInput.value;
+        const confirm  = confirmInput.value;
+
+        let errorEl = document.getElementById('register-error');
+        if (!errorEl) {
+            errorEl = document.createElement('p');
+            errorEl.id = 'register-error';
+            errorEl.style.cssText = 'color:#e53935;text-align:center;margin-top:10px;font-size:0.9rem;';
+            this.appendChild(errorEl);
+        }
+        errorEl.textContent = '';
+
+        if (password !== confirm) {
+            errorEl.textContent = 'Les mots de passe ne correspondent pas.';
+            return;
+        }
+
+        const btn = this.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Création...';
+
+        try {
+            const res = await fetch('http://localhost:3000/api/users/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, email, password })
+            });
+            if (!res.ok) {
+                const msg = await res.json();
+                errorEl.textContent = typeof msg === 'string' ? msg : 'Erreur lors de l\'inscription.';
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Créer mon compte';
+                return;
+            }
+            errorEl.style.color = '#43a047';
+            errorEl.textContent = 'Compte créé ! Redirection vers la connexion...';
+            setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+        } catch(err) {
+            errorEl.textContent = 'Impossible de joindre le serveur.';
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Créer mon compte';
+        }
+    });
 </script>
+<script src="navbar-auth.js"></script>
 
 </body>
 </html>
