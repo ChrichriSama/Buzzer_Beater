@@ -28,7 +28,7 @@ export default function Login({setShowLogin, myStorage, setCurrentUser}){
             console.log("Error with Login: " + err)};
     }
     return(
-        <div className='loginContainer'>x
+        <div className='loginContainer'>
             <div className='logo'>
                 <SportsBasketballIcon/>
                 Welcome

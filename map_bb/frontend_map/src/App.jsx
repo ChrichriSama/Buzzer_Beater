@@ -47,6 +47,16 @@ import Login from './components/Login';
       getPins()
     },[]);
 
+    useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const userFromUrl = params.get('user');
+      if (userFromUrl) {
+        setCurrentUser(userFromUrl);
+        myStorage.setItem('user', userFromUrl);
+        window.history.replaceState(null, '', '/');
+      }
+    }, []);
+
 
     const handleMarkerClick = (id, lat, long)=>{
       setCurrentPlaceId(id);
@@ -54,6 +64,10 @@ import Login from './components/Login';
      };
 
     const handleAddClick = (e) => {
+      if (!currentUser) {
+        setShowLogin(true);
+        return;
+      }
       const {lng, lat} = e.lngLat;
       setnewPlace({
         lat: lat,
@@ -86,16 +100,24 @@ import Login from './components/Login';
     const handleLogout = () => {
       myStorage.removeItem("user");
       setCurrentUser(null);
+      // Vide aussi la session sur localhost:3000 et redirige vers login
+      window.location.href = 'http://localhost:3000/login.html?logout=1';
     }
 
     return (
         <div className="App">
           {currentUser ? (
                   <div className='navbar'>
-                  <button className='button logout' onClick={handleLogout}>Log out</button> </div>
+                  <a className='button nav-link' href='http://localhost:3000/bb_menu.html'>Accueil</a>
+                  <a className='button nav-link' href={`http://localhost:3000/bb_forum.html?user=${encodeURIComponent(currentUser)}`}>Forum</a>
+                  <span className='button nav-user'>{currentUser}</span>
+                  <button className='button logout' onClick={handleLogout}>Déco</button>
+                  </div>
               ) : (<div className='navbar'>
-                  <button className='button login' onClick={()=>setShowLogin(true)}>Log in</button>
-                  <button className='button register' onClick={()=>setShowRegister(true)}>Register</button>
+                  <a className='button nav-link' href='http://localhost:3000/bb_menu.html'>Accueil</a>
+                  <a className='button nav-link' href='http://localhost:3000/bb_forum.html'>Forum</a>
+                  <button className='button login' onClick={()=>setShowLogin(true)}>Connexion</button>
+                  <button className='button register' onClick={()=>setShowRegister(true)}>Créer compte</button>
                 </div>)}
           <Map
             mapboxAccessToken={import.meta.env.VITE_MAPBOX}

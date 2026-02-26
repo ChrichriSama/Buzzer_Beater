@@ -20,8 +20,8 @@
             <li><a href="bb_news.html">News</a></li>
             <li><a href="bb_teams.html">Teams</a></li>
             <li>Results</li>
-            <li>Map</li>
-            <li>Message</li>
+            <li><a href="http://localhost:5173">Map</a></li>
+            <li><a href="bb_forum.html">Forum</a></li>
             <li class="nav-active"><a href="login.html">Connect</a></li>
         </ul>
     </nav>
@@ -32,43 +32,26 @@
 
     <div class="login-wrapper">
         <div class="login-card">
-            
+
             <div class="login-brand">
                 <img src="logo_bb.png" alt="Buzzer Beater Logo" class="login-logo">
                 <h1>Buzzer<span>Beater</span></h1>
                 <p>Connecte-toi pour accéder à ton espace</p>
             </div>
 
-            <!-- Form -->
-            <form class="login-form" action="" method="POST">
-
+            <form class="login-form" id="login-form" action="" method="POST">
                 <div class="input-group">
                     <label for="username">Nom d'utilisateur</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-user"></i>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            placeholder="Ton pseudo..."
-                            required
-                            autocomplete="username"
-                        >
+                        <input type="text" id="username" name="username" placeholder="Ton pseudo..." required autocomplete="username">
                     </div>
                 </div>
-
                 <div class="input-group">
                     <label for="password">Mot de passe</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-lock"></i>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="••••••••"
-                            required
-                            autocomplete="current-password"
-                        >
+                        <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
                         <button type="button" class="toggle-pwd" onclick="togglePassword()" aria-label="Afficher/masquer mot de passe">
                             <i class="fa-solid fa-eye" id="eye-icon"></i>
                         </button>
@@ -78,10 +61,8 @@
                     <i class="fa-solid fa-basketball"></i>
                     Se connecter
                 </button>
-
             </form>
 
-            <!-- Register -->
             <div class="login-register">
                 <p>Pas encore de compte ? <a href="register.html">Créer un compte</a></p>
             </div>
@@ -91,7 +72,7 @@
 
 <script>
     function togglePassword() {
-        const pwd = document.getElementById('password');
+        const pwd  = document.getElementById('password');
         const icon = document.getElementById('eye-icon');
         if (pwd.type === 'password') {
             pwd.type = 'text';
@@ -101,7 +82,49 @@
             icon.classList.replace('fa-eye-slash', 'fa-eye');
         }
     }
+
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const btn = document.querySelector('.btn-login');
+        const originalHTML = btn.innerHTML;
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connexion...';
+
+        let errorEl = document.getElementById('login-error');
+        if (!errorEl) {
+            errorEl = document.createElement('p');
+            errorEl.id = 'login-error';
+            errorEl.style.cssText = 'color:#e53935;text-align:center;margin-top:8px;font-size:0.9rem;';
+            document.getElementById('login-form').appendChild(errorEl);
+        }
+        errorEl.textContent = '';
+
+        try {
+            const res = await fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (!res.ok) throw new Error('Identifiants incorrects');
+
+            const data = await res.json();
+            // Stocker dans localStorage (utile si ouvert depuis localhost:3000)
+            localStorage.setItem('user', data.username);
+            // Rediriger vers la carte en passant le username dans l'URL
+            window.location.href = 'http://localhost:5173?user=' + encodeURIComponent(data.username);
+
+        } catch (err) {
+            errorEl.textContent = 'Identifiants incorrects. Réessaie.';
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+        }
+    });
 </script>
+<script src="navbar-auth.js"></script>
 
 </body>
 </html>

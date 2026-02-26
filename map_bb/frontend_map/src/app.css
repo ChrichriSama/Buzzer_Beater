@@ -92,3 +92,19 @@ input::placeholder, textarea::placeholder{
     background-color: slateblue ;
 }
 
+.nav-link{
+    background-color: #2c6e8a;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-user{
+    background: transparent;
+    color: rgba(244,94,7,1);
+    font-weight: 700;
+    font-size: 0.82rem;
+    border: 1px solid rgba(244,94,7,0.40);
+    cursor: default;
+}
+
