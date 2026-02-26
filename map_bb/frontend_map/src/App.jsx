@@ -71,10 +71,11 @@ import Login from './components/Login';
         return;
       }
       const {lng, lat} = e.lngLat;
-      setnewPlace({
+      { currentUser && setnewPlace({
         lat: lat,
         lng: lng,
-      });
+      }); }
+      
     };
 
     const handleSubmit = async (e) => {
@@ -107,6 +108,7 @@ import Login from './components/Login';
     }
 
     return (
+
         <div className="App">
           {currentUser ? (
                   <div className='navbar'>
