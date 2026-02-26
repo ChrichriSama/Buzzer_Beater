@@ -499,6 +499,10 @@ Des outils d'IA (principalement **Claude** et **ChatGPT**) ont été utilisés d
 
 Le code source est disponible sur GitHub : `https://github.com/Yanis-LM5/Buzzer_Beater`
 
+### Annexe C — Illustration MongoDB
+
+![Illustration MongoDB](./imgs_prjt/MongoDBillustration.png)
+
 ---
 
 *Compte rendu rédigé par `Dindanda Christopher` et `Metari Yanis` dans le cadre du module APP3 — Programmation Web, 2025-2026.*

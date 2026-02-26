@@ -11,6 +11,16 @@
     height: 260px;
 }
 
+header {
+    width: 100%;
+    height: var(--header-height);
+    background: rgba(244, 94, 7, 1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
 label{
     width:max-content;
     color: tomato;

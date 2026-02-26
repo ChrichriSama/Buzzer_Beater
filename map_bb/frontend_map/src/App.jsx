@@ -112,6 +112,7 @@ import Login from './components/Login';
         <div className="App">
           {currentUser ? (
                   <div className='navbar'>
+                  {/* <li><img src="../../imgs_prjt/logo_bb.png" alt="logo"/></li> */}
                   <a className='button nav-link' href='http://localhost:3000/pgs_prjts/bb_menu.html'>Accueil</a>
                   <a className='button nav-link' href={`http://localhost:3000/pgs_prjts/bb_forum.html?user=${encodeURIComponent(currentUser)}`}>Forum</a>
                   <span className='button nav-user'>{currentUser}</span>
